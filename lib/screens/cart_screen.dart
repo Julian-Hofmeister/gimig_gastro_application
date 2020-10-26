@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gimig_gastro_application/classes/item_class.dart';
@@ -8,6 +8,7 @@ import 'package:gimig_gastro_application/components/cards/order_card.dart';
 import 'package:gimig_gastro_application/components/elements/background_layout.dart';
 import 'package:gimig_gastro_application/components/elements/navigationbar.dart';
 import 'package:gimig_gastro_application/components/elements/text_button.dart';
+import 'package:gimig_gastro_application/functions/firebase_functions.dart';
 import 'package:gimig_gastro_application/functions/table_number_storage.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
 import 'package:gimig_gastro_application/objects/category_example.dart';
@@ -23,16 +24,19 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
-  final _auth = FirebaseAuth.instance;
+  FirebaseFunctions firebaseFunctions = FirebaseFunctions();
+
+  // final _auth = FirebaseAuth.instance;
+  // FirebaseUser loggedInUser;
+
   final _firestore = Firestore.instance;
-  FirebaseUser loggedInUser;
   String timestamp;
   int tableNumber;
 
   @override
   void initState() {
     super.initState();
-    getCurrentUser();
+    // firebaseFunctions.getCurrentUser();
     widget.storage.readTableNumber().then((int value) {
       setState(() {
         tableNumber = value;
@@ -40,14 +44,14 @@ class _CartScreenState extends State<CartScreen> {
     });
   }
 
-  void getCurrentUser() async {
-    try {
-      final user = await _auth.currentUser();
-      if (user != null) {}
-    } catch (e) {
-      print(e);
-    }
-  }
+  // void getCurrentUser() async {
+  //   try {
+  //     final user = await _auth.currentUser();
+  //     if (user != null) {}
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   void getTime() {
     timestamp = Timestamp.fromMillisecondsSinceEpoch(
@@ -56,7 +60,7 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   void order() {
-    getCurrentUser();
+    // getCurrentUser();
     setState(() {
       getTime();
 
@@ -65,7 +69,7 @@ class _CartScreenState extends State<CartScreen> {
           "name": item.name,
           "amount": item.amount,
           "price": item.price,
-          "sender": loggedInUser.email,
+          "sender": "venezia-gimig",
           "tableNumber": tableNumber,
           "timestamp": timestamp,
           "progress": false,

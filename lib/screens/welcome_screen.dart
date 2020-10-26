@@ -1,16 +1,17 @@
-import 'dart:ui';
+gimport 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gimig_gastro_application/components/elements/text_button.dart';
 import 'package:gimig_gastro_application/objects/category_example.dart';
+import 'package:gimig_gastro_application/screens/account/settings_screen.dart';
 import 'package:gimig_gastro_application/screens/cart_screen.dart';
 import 'file:///C:/Users/julia/AndroidStudioProjects/Flutter/gimig_gastro_application/lib/main/constants.dart';
 import 'package:gimig_gastro_application/screens/overview_screen.dart';
 
 // ignore: must_be_immutable
 class WelcomeScreen extends StatefulWidget {
-  WelcomeScreen({this.name});
   static const String id = 'welcome_screen';
+  WelcomeScreen({this.name});
   String name;
 
   @override
@@ -75,14 +76,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 Container(
                   width: 700,
                   child: GestureDetector(
-                    // onDoubleTap: () {
-                    //   Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => SettingsScreen(),
-                    //     ),
-                    //   );
-                    // },
+                    onDoubleTap: () {
+                      Navigator.pushNamed(context, SettingsScreen.id);
+                    },
                     child: RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(

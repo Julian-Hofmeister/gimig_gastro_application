@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gimig_gastro_application/classes/category_class.dart';
+import 'package:gimig_gastro_application/screens/account/login_screen.dart';
+import 'package:gimig_gastro_application/screens/account/registration_screen.dart';
+import 'package:gimig_gastro_application/screens/account/settings_screen.dart';
 import 'package:gimig_gastro_application/screens/big_card_screen.dart';
 import 'package:gimig_gastro_application/screens/cart_screen.dart';
 import 'package:gimig_gastro_application/screens/overview_screen.dart';
@@ -46,6 +49,19 @@ class RouteGenerator {
 
       case CartScreen.id:
         return MaterialPageRoute(builder: (_) => CartScreen());
+
+      case LoginScreen.id:
+        return MaterialPageRoute(
+          builder: (_) => LoginScreen(),
+        );
+
+      case RegistrationScreen.id:
+        return MaterialPageRoute(
+          builder: (_) => RegistrationScreen(),
+        );
+
+      case SettingsScreen.id:
+        return MaterialPageRoute(builder: (_) => SettingsScreen());
 
       default:
         return _errorRoute();
