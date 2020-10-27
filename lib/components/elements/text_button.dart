@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
 
-class TextButton extends StatelessWidget {
-  TextButton({
+class CustomTextButton extends StatelessWidget {
+  CustomTextButton({
     @required this.buttonText,
     this.buttonAction,
     this.buttonHeigt = 50,

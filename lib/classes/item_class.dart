@@ -6,6 +6,7 @@ class Item {
     this.description,
     this.amount = 1,
     this.ordered = false,
+    this.isFood = true,
   });
 
   final String image;
@@ -14,4 +15,5 @@ class Item {
   final String description;
   int amount;
   bool ordered;
+  bool isFood;
 }

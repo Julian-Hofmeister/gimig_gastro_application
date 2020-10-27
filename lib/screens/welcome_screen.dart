@@ -1,11 +1,12 @@
-gimport 'dart:ui';
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gimig_gastro_application/components/elements/text_button.dart';
+import 'package:gimig_gastro_application/main/constants.dart';
 import 'package:gimig_gastro_application/objects/category_example.dart';
 import 'package:gimig_gastro_application/screens/account/settings_screen.dart';
 import 'package:gimig_gastro_application/screens/cart_screen.dart';
-import 'file:///C:/Users/julia/AndroidStudioProjects/Flutter/gimig_gastro_application/lib/main/constants.dart';
 import 'package:gimig_gastro_application/screens/overview_screen.dart';
 
 // ignore: must_be_immutable
@@ -100,7 +101,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
                 Column(
                   children: <Widget>[
-                    TextButton(
+                    CustomTextButton(
                       textSize: 25,
                       buttonHeigt: 55,
                       buttonText: "Getränke",
@@ -110,7 +111,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       },
                     ),
                     SizedBox(height: 20),
-                    TextButton(
+                    CustomTextButton(
                       textSize: 25,
                       buttonHeigt: 55,
                       buttonText: "Speisen",

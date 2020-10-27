@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gimig_gastro_application/classes/item_class.dart';
@@ -8,7 +7,6 @@ import 'package:gimig_gastro_application/components/cards/order_card.dart';
 import 'package:gimig_gastro_application/components/elements/background_layout.dart';
 import 'package:gimig_gastro_application/components/elements/navigationbar.dart';
 import 'package:gimig_gastro_application/components/elements/text_button.dart';
-import 'package:gimig_gastro_application/functions/firebase_functions.dart';
 import 'package:gimig_gastro_application/functions/table_number_storage.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
 import 'package:gimig_gastro_application/objects/category_example.dart';
@@ -24,11 +22,6 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
-  FirebaseFunctions firebaseFunctions = FirebaseFunctions();
-
-  // final _auth = FirebaseAuth.instance;
-  // FirebaseUser loggedInUser;
-
   final _firestore = Firestore.instance;
   String timestamp;
   int tableNumber;
@@ -36,22 +29,12 @@ class _CartScreenState extends State<CartScreen> {
   @override
   void initState() {
     super.initState();
-    // firebaseFunctions.getCurrentUser();
     widget.storage.readTableNumber().then((int value) {
       setState(() {
         tableNumber = value;
       });
     });
   }
-
-  // void getCurrentUser() async {
-  //   try {
-  //     final user = await _auth.currentUser();
-  //     if (user != null) {}
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
 
   void getTime() {
     timestamp = Timestamp.fromMillisecondsSinceEpoch(
@@ -60,19 +43,24 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   void order() {
-    // getCurrentUser();
     setState(() {
       getTime();
 
       for (Item item in shoppingCart.shoppingList) {
-        _firestore.collection("items").add({
+        _firestore
+            .collection("venezia")
+            .document("tables")
+            .collection("tables")
+            .document("table-$tableNumber")
+            .collection("orders")
+            .add({
           "name": item.name,
           "amount": item.amount,
           "price": item.price,
-          "sender": "venezia-gimig",
           "tableNumber": tableNumber,
           "timestamp": timestamp,
           "progress": false,
+          "isFood": item.isFood,
         });
       }
       for (Item item in shoppingCart.shoppingList) {
@@ -108,32 +96,10 @@ class _CartScreenState extends State<CartScreen> {
                           )),
                 ),
                 if (shoppingCart.shoppingList.length > 0)
-                  // Padding(
-                  //   padding: const EdgeInsets.only(
-                  //       left: 160, right: 160, top: 50, bottom: 80),
-                  //   child: SizedBox(
-                  //     height: 50,
-                  //     child: FlatButton(
-                  //       color: kAccentColor,
-                  //       splashColor: Colors.white,
-                  //       highlightColor: Colors.grey,
-                  //       child: Text(
-                  //         "Bestellung Abschließen",
-                  //         style: kFoodCardDescriptionTextStyle.copyWith(
-                  //             fontSize: 22,
-                  //             color: Colors.white,
-                  //             fontWeight: FontWeight.bold),
-                  //       ),
-                  //       onPressed: () {
-                  //         order();
-                  //       },
-                  //     ),
-                  //   ),
-                  // ),
                   Padding(
                     padding: const EdgeInsets.only(
                         left: 160, right: 160, top: 50, bottom: 80),
-                    child: TextButton(
+                    child: CustomTextButton(
                       buttonText: "Bestellung Abschließen",
                       buttonAction: order,
                       backgroundColor: kAccentColor,
@@ -150,15 +116,15 @@ class _CartScreenState extends State<CartScreen> {
                           width: 400,
                           child: Text(
                             "Sie haben noch keine Getränke oder Speisen gewählt.",
-                            style:
-                                kFoodCardPriceTextStyle.copyWith(fontSize: 22),
+                            style: kFoodCardPriceTextStyle.copyWith(
+                                fontSize: 22, color: kFontColor2),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                             textAlign: TextAlign.center,
                           ),
                         ),
                         SizedBox(height: 60),
-                        TextButton(
+                        CustomTextButton(
                           buttonWidth: 400,
                           buttonText: "Getränke wählen",
                           backgroundColor: kAccentColor,
@@ -169,7 +135,7 @@ class _CartScreenState extends State<CartScreen> {
                           },
                         ),
                         SizedBox(height: 30),
-                        TextButton(
+                        CustomTextButton(
                           buttonWidth: 400,
                           buttonText: "Speisen wählen",
                           backgroundColor: kAccentColor,

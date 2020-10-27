@@ -512,6 +512,7 @@ Item beverage1 = Item(
   image: "images/coke.png",
   description: "0,2L / 0,4L",
   price: "2,20€",
+  isFood: false,
 );
 
 Item beverage12 = Item(
@@ -520,6 +521,7 @@ Item beverage12 = Item(
       "images/kisspng-orange-soft-drink-fanta-fizzy-drinks-orange-juice-juice-cup-5adbde6d1b7221.4183804515243587651124.png",
   description: "0,2L / 0,4L",
   price: "2,20€",
+  isFood: false,
 );
 
 Item beverage3 = Item(
@@ -528,4 +530,5 @@ Item beverage3 = Item(
       "images/kisspng-mist-twst-fizzy-drinks-lemon-lime-drink-milkshake-chang-shuangbing-drink-5aef6be5b425c5.6233776815256401657379.png",
   description: "0,2L / 0,4L",
   price: "2,20€",
+  isFood: false,
 );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/julia/AndroidStudioProjects/Flutter/gimig_gastro_application/lib/main/constants.dart';
+import 'package:gimig_gastro_application/main/constants.dart';
 
 class Backgroundlayout extends StatelessWidget {
   Backgroundlayout({this.name});
