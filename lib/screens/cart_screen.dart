@@ -48,10 +48,10 @@ class _CartScreenState extends State<CartScreen> {
 
       for (Item item in shoppingCart.shoppingList) {
         _firestore
-            .collection("venezia")
-            .document("tables")
+            .collection("restaurants")
+            .document("venezia")
             .collection("tables")
-            .document("table-$tableNumber")
+            .document("$tableNumber")
             .collection("orders")
             .add({
           "name": item.name,
@@ -59,10 +59,21 @@ class _CartScreenState extends State<CartScreen> {
           "price": item.price,
           "tableNumber": tableNumber,
           "timestamp": timestamp,
-          "progress": false,
           "isFood": item.isFood,
+          "inProgress": false,
+          "isPaid": false,
         });
       }
+
+      _firestore
+          .collection("restaurants")
+          .document("venezia")
+          .collection("tables")
+          .document("$tableNumber")
+          .setData({
+        "tableNumber": tableNumber,
+      });
+
       for (Item item in shoppingCart.shoppingList) {
         shoppingCart.orderdList.insert(0, item);
       }
