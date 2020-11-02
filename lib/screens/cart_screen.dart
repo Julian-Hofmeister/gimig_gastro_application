@@ -5,7 +5,7 @@ import 'package:gimig_gastro_application/classes/item_class.dart';
 import 'package:gimig_gastro_application/classes/shopping_cart.dart';
 import 'package:gimig_gastro_application/components/cards/order_card.dart';
 import 'package:gimig_gastro_application/components/elements/background_layout.dart';
-import 'package:gimig_gastro_application/components/elements/navigationbar.dart';
+import 'package:gimig_gastro_application/components/elements/side_navigationbar.dart';
 import 'package:gimig_gastro_application/components/elements/text_button.dart';
 import 'package:gimig_gastro_application/functions/table_number_storage.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
@@ -72,6 +72,7 @@ class _CartScreenState extends State<CartScreen> {
           .document("$tableNumber")
           .setData({
         "tableNumber": tableNumber,
+        "status": "orderRequest",
       });
 
       for (Item item in shoppingCart.shoppingList) {
@@ -186,7 +187,7 @@ class _CartScreenState extends State<CartScreen> {
               ],
             ),
           ),
-          DrawerPreview(
+          SideNavigationBar(
             buttonActionNavigator: () => _scaffoldKey.currentState.openDrawer(),
           ),
         ],

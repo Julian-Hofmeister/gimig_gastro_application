@@ -3,8 +3,8 @@ import 'package:gimig_gastro_application/main/constants.dart';
 import 'package:gimig_gastro_application/screens/cart_screen.dart';
 import 'package:gimig_gastro_application/screens/welcome_screen.dart';
 
-class DrawerPreview extends StatelessWidget {
-  DrawerPreview({this.buttonActionNavigator});
+class SideNavigationBar extends StatelessWidget {
+  SideNavigationBar({this.buttonActionNavigator});
   final Function buttonActionNavigator;
 
   @override

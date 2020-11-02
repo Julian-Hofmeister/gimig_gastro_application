@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gimig_gastro_application/classes/category_class.dart';
 import 'package:gimig_gastro_application/components/cards/big_card.dart';
 import 'package:gimig_gastro_application/components/elements/background_layout.dart';
-import 'package:gimig_gastro_application/components/elements/navigationbar.dart';
+import 'package:gimig_gastro_application/components/elements/side_navigationbar.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
 
 class BigCardScreen extends StatefulWidget {
@@ -43,7 +43,7 @@ class _BigCardScreenState extends State<BigCardScreen> {
               ),
             ),
           ),
-          DrawerPreview(
+          SideNavigationBar(
             buttonActionNavigator: () => _scaffoldKey.currentState.openDrawer(),
           ),
         ],
