@@ -87,6 +87,12 @@ class _DetailDialogState extends State<DetailDialog> {
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: 80,
+                  ),
+                  if (shoppingCart.shoppingList.contains(widget.item) &&
+                      widget.cartAccess == false)
+                    Text("befindet sich bereits im EInkaufswagen"),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -131,9 +137,10 @@ class _DetailDialogState extends State<DetailDialog> {
                       ),
                       OrderButton(
                         buttonHeight: 50,
-                        buttonName: widget.cartAccess == false
-                            ? "Hinzufügen"
-                            : "Bestätigen",
+                        buttonName:
+                            shoppingCart.shoppingList.contains(widget.item)
+                                ? "Bestätigen"
+                                : "Hinzufügen",
                         buttonAction: () {
                           setState(
                             () {
@@ -154,9 +161,11 @@ class _DetailDialogState extends State<DetailDialog> {
                               while (i < widget.item.amount) {
                                 if (shoppingCart.shoppingList
                                     .contains(widget.item)) {
-                                } else {
-                                  shoppingCart.shoppingList.add(widget.item);
+                                  shoppingCart.shoppingList.remove(widget.item);
                                 }
+                                shoppingCart.shoppingList
+                                    .insert(0, widget.item);
+
                                 print(shoppingCart.shoppingList);
                                 i++;
                               }
