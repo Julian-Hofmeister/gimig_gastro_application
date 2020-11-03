@@ -1,4 +1,3 @@
-import 'dart:html';
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,9 +27,23 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   Firestore _firestore = Firestore.instance;
+  String tableMessage;
   int tableNumber;
   String status;
-  String tableMessage;
+
+  Future<void> checkMessage({documentID}) async {
+    print("MESSAGE!!!");
+
+    await _firestore
+        .collection("restaurants")
+        .document("venezia")
+        .collection("tables")
+        .document("$tableNumber")
+        .collection("messages")
+        .document("$documentID")
+        .updateData({"state": true});
+    showMessage();
+  }
 
   Future<void> showMessage() async {
     await showDialog(
@@ -67,18 +80,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       });
     });
     getStatus();
-
-    // Stream<QuerySnapshot> messageStream() {
-    //   _firestore
-    //       .collection('restaurants')
-    //       .document('venezia')
-    //       .collection('tables')
-    //       .document("$tableNumber")
-    //       .collection("messages")
-    //       .snapshots().map((snapshot) {
-    //         if(snapshot.documents.
-    //   });
-    // }
   }
 
   Widget build(BuildContext context) {
@@ -101,15 +102,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
             );
           }
-          final item = snapshot.data.documents;
+          final messages = snapshot.data.documents;
 
-          for (var item in item) {
-            final message = item.data['message'];
-            final state = item.data['state'];
+          for (var document in messages) {
+            final documentID = document.documentID;
+            final message = document.data['message'];
+            final state = document.data['state'];
 
-            if (message == "message1") {
+            if (message == "message1" && state != true) {
               tableMessage = message;
               print(message);
+              checkMessage(documentID: documentID);
             }
           }
 
