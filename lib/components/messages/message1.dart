@@ -16,20 +16,14 @@ class _Message1State extends State<Message1> {
         ),
       ),
       content: Container(
-        width: 500,
-        height: 250,
+        width: 400,
+        height: 200,
         color: Colors.white,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Text(
               "Wir wünschen euch einen guten Appetit!",
-              style: kFoodCardDescriptionTextStyle.copyWith(fontSize: 22),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              "~Venezia",
               style: kFoodCardDescriptionTextStyle.copyWith(fontSize: 22),
               textAlign: TextAlign.center,
             ),
