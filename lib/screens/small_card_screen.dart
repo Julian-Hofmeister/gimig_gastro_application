@@ -24,6 +24,7 @@ class _SmallCardScreenState extends State<SmallCardScreen> {
       resizeToAvoidBottomPadding: false,
       backgroundColor: kBackgroundColor,
       body: Stack(
+        // TODO ADD NAVIGATION ARROWS
         children: <Widget>[
           Backgroundlayout(
             name: widget.category.title,

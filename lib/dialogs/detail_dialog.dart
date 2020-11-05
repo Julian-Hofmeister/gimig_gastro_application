@@ -157,6 +157,7 @@ class _DetailDialogState extends State<DetailDialog> {
                                 );
                               }
 
+                              // TODO ADD SAME ITEMS
                               var i = 0;
                               while (i < widget.item.amount) {
                                 if (shoppingCart.shoppingList

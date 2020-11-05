@@ -42,6 +42,7 @@ class _CartScreenState extends State<CartScreen> {
         .toString();
   }
 
+  // TODO SEND SAME ITEMS TOGETHER
   void order() {
     setState(() {
       getTime();

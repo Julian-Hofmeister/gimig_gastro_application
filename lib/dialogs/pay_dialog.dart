@@ -18,6 +18,7 @@ class _PayDialogState extends State<PayDialog> {
   bool isTogether;
   bool isCache;
 
+  // TODO OPEN REVIEW DIALOG
   Future sendPayRequest({tableNumber}) async {
     await Firestore.instance
         .collection('restaurants')

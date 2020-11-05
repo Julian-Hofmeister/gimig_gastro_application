@@ -45,6 +45,7 @@ const kButtonTextStyle = TextStyle(
   letterSpacing: 1,
 );
 
+// TODO ADD COLOR DESIGNS
 // const kBackgroundColor = Color(0xFFEEEEEE);
 // const kAccentColor = Color(0xFFFF934F);
 //

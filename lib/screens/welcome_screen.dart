@@ -88,6 +88,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return status;
   }
 
+  // TODO DARKEN DISPLAY AFTER 5MIN
+
   @override
   void initState() {
     super.initState();
@@ -99,6 +101,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     getStatus();
   }
 
+  // TODO ANIMATIONS EVERYWHERE
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
@@ -135,6 +138,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             }
           }
 
+          // TODO ADD ERROR MESSAGE
           return StreamBuilder<QuerySnapshot>(
             //STREAM
             stream: _firestore
