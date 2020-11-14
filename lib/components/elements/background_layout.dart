@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
 
-class Backgroundlayout extends StatelessWidget {
-  Backgroundlayout({this.name});
+class BackgroundLayout extends StatelessWidget {
+  BackgroundLayout({this.name});
 
   final String name;
 

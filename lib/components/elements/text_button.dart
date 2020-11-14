@@ -5,7 +5,7 @@ class CustomTextButton extends StatelessWidget {
   CustomTextButton({
     @required this.buttonText,
     this.buttonAction,
-    this.buttonHeigt = 50,
+    this.buttonHeight = 50,
     this.buttonWidth = 350,
     this.textSize = 22,
     this.textColor = Colors.black87,
@@ -13,7 +13,7 @@ class CustomTextButton extends StatelessWidget {
   });
   final String buttonText;
   final Function buttonAction;
-  final double buttonHeigt;
+  final double buttonHeight;
   final double buttonWidth;
   final double textSize;
   final Color textColor;
@@ -22,7 +22,7 @@ class CustomTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: buttonHeigt,
+      height: buttonHeight,
       width: buttonWidth,
       child: FlatButton(
         onPressed: buttonAction,

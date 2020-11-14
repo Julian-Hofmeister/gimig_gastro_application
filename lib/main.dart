@@ -31,6 +31,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      builder: (context, child) {
+        return ScrollConfiguration(
+          behavior: MyBehavior(),
+          child: child,
+        );
+      },
       onGenerateRoute: RouteGenerator.generateRoute,
       initialRoute: WelcomeScreen.id,
     );

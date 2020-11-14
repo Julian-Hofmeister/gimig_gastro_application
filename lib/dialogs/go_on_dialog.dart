@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
 import 'package:gimig_gastro_application/screens/cart_screen.dart';
 
-class GoOnDialog extends StatefulWidget {
-  @override
-  _GoOnDialogState createState() => _GoOnDialogState();
-}
-
-class _GoOnDialogState extends State<GoOnDialog> {
+class GoOnDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(

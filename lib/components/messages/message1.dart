@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
 
-class Message1 extends StatefulWidget {
-  @override
-  _Message1State createState() => _Message1State();
-}
-
-class _Message1State extends State<Message1> {
+class Message1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(

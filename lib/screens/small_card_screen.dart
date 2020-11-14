@@ -6,28 +6,20 @@ import 'package:gimig_gastro_application/components/elements/background_layout.d
 import 'package:gimig_gastro_application/components/elements/side_navigationbar.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
 
-class SmallCardScreen extends StatefulWidget {
+class SmallCardScreen extends StatelessWidget {
   static const String id = 'small_card_screen';
   SmallCardScreen({this.category});
   final Category category;
 
-  @override
-  _SmallCardScreenState createState() => _SmallCardScreenState();
-}
-
-class _SmallCardScreenState extends State<SmallCardScreen> {
-  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
-
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       resizeToAvoidBottomPadding: false,
       backgroundColor: kBackgroundColor,
       body: Stack(
         // TODO ADD NAVIGATION ARROWS
         children: <Widget>[
-          Backgroundlayout(
-            name: widget.category.title,
+          BackgroundLayout(
+            name: category.title,
           ),
           GlowingOverscrollIndicator(
             axisDirection: AxisDirection.down,
@@ -35,16 +27,14 @@ class _SmallCardScreenState extends State<SmallCardScreen> {
             child: ListView(
               padding: EdgeInsets.only(top: 50, right: 100),
               children: List.generate(
-                widget.category.items.length,
+                category.items.length,
                 (index) => SmallCard(
-                  item: widget.category.items[index],
+                  item: category.items[index],
                 ),
               ),
             ),
           ),
-          SideNavigationBar(
-            buttonActionNavigator: () => _scaffoldKey.currentState.openDrawer(),
-          ),
+          SideNavigationBar(),
         ],
       ),
     );
