@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:gimig_gastro_application/components/elements/text_button.dart';
 import 'package:gimig_gastro_application/components/messages/message1.dart';
 import 'package:gimig_gastro_application/dialogs/bell_dialog.dart';
+import 'package:gimig_gastro_application/dialogs/error_dialog.dart';
 import 'package:gimig_gastro_application/dialogs/pay_dialog.dart';
+import 'package:gimig_gastro_application/functions/connection_check.dart';
 import 'package:gimig_gastro_application/functions/table_number_storage.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
 import 'package:gimig_gastro_application/objects/category_example.dart';
@@ -27,6 +30,8 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  StreamSubscription _connectionChangeStream;
+  bool isOffline = false;
   Firestore _firestore = Firestore.instance;
   String tableMessage;
   int tableNumber;
@@ -90,9 +95,29 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   // TODO DARKEN DISPLAY AFTER 5MIN
 
+  // ON CONNECTION CHANGE
+  void connectionChanged(dynamic hasConnection) {
+    setState(() {
+      isOffline = !hasConnection;
+      showDialog(
+        context: context,
+        builder: (_) => ErrorDialog(
+          isOffline: isOffline,
+        ),
+      );
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+
+    // LISTEN TO CONNECTION
+    ConnectionStatusSingleton connectionStatus =
+        ConnectionStatusSingleton.getInstance();
+    _connectionChangeStream =
+        connectionStatus.connectionChange.listen(connectionChanged);
+
     widget.storage.readTableNumber().then((int value) {
       setState(() {
         tableNumber = value;
