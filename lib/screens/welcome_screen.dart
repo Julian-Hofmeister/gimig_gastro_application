@@ -14,13 +14,12 @@ import 'package:gimig_gastro_application/screens/account/settings_screen.dart';
 import 'package:gimig_gastro_application/screens/cart_screen.dart';
 import 'package:gimig_gastro_application/screens/overview_screen.dart';
 
-// ignore: must_be_immutable
 class WelcomeScreen extends StatefulWidget {
   static const String id = 'welcome_screen';
 
   final TableNumberStorage storage = TableNumberStorage();
   WelcomeScreen({this.name});
-  String name;
+  final String name;
 
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
@@ -261,7 +260,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           children: <Widget>[
                             CustomTextButton(
                               textSize: 25,
-                              buttonHeigt: 55,
+                              buttonHeight: 55,
                               buttonText: "Getränke",
                               buttonAction: () {
                                 Navigator.of(context).pushNamed(
@@ -272,7 +271,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             SizedBox(height: 20),
                             CustomTextButton(
                               textSize: 25,
-                              buttonHeigt: 55,
+                              buttonHeight: 55,
                               buttonText: "Speisen",
                               buttonAction: () {
                                 Navigator.of(context).pushNamed(
@@ -285,7 +284,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             if (ableToPay == true)
                               CustomTextButton(
                                 textSize: 25,
-                                buttonHeigt: 55,
+                                buttonHeight: 55,
                                 buttonText: "Zahlen",
                                 buttonAction: () {
                                   showDialog(

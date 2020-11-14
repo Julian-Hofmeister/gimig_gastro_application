@@ -21,7 +21,6 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
   final _firestore = Firestore.instance;
   String timestamp;
   int tableNumber;
@@ -43,39 +42,44 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   // TODO SEND SAME ITEMS TOGETHER
+  // SEND ORDER
   void order() {
-    setState(() {
-      getTime();
+    // GET CURRENT TIME
+    getTime();
 
-      for (Item item in shoppingCart.shoppingList) {
-        _firestore
-            .collection("restaurants")
-            .document("venezia")
-            .collection("tables")
-            .document("$tableNumber")
-            .collection("orders")
-            .add({
-          "name": item.name,
-          "amount": item.amount,
-          "price": item.price,
-          "tableNumber": tableNumber,
-          "timestamp": timestamp,
-          "isFood": item.isFood,
-          "inProgress": false,
-          "isPaid": false,
-        });
-      }
-
+    // ADD EACH ITEM TO ORDERS
+    for (Item item in shoppingCart.shoppingList) {
       _firestore
           .collection("restaurants")
           .document("venezia")
           .collection("tables")
           .document("$tableNumber")
-          .setData({
+          .collection("orders")
+          .add({
+        "name": item.name,
+        "amount": item.amount,
+        "price": item.price,
         "tableNumber": tableNumber,
-        "status": "orderRequest",
+        "timestamp": timestamp,
+        "isFood": item.isFood,
+        "inProgress": false,
+        "isPaid": false,
       });
+    }
 
+    // SEND ORDER REQUEST
+    _firestore
+        .collection("restaurants")
+        .document("venezia")
+        .collection("tables")
+        .document("$tableNumber")
+        .setData({
+      "tableNumber": tableNumber,
+      "status": "orderRequest",
+    });
+
+    // CLEAR SHOPPING CART
+    setState(() {
       for (Item item in shoppingCart.shoppingList) {
         shoppingCart.orderdList.insert(0, item);
       }
@@ -85,12 +89,11 @@ class _CartScreenState extends State<CartScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       resizeToAvoidBottomPadding: false,
       backgroundColor: kBackgroundColor,
       body: Stack(
         children: <Widget>[
-          Backgroundlayout(
+          BackgroundLayout(
             name: "Bestellung",
           ),
           GlowingOverscrollIndicator(
@@ -188,9 +191,7 @@ class _CartScreenState extends State<CartScreen> {
               ],
             ),
           ),
-          SideNavigationBar(
-            buttonActionNavigator: () => _scaffoldKey.currentState.openDrawer(),
-          ),
+          SideNavigationBar(),
         ],
       ),
     );

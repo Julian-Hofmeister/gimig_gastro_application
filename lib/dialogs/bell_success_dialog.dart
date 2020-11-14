@@ -1,18 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gimig_gastro_application/functions/table_number_storage.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
 
-class BellSuccessDialog extends StatefulWidget {
+class BellSuccessDialog extends StatelessWidget {
   final TableNumberStorage storage = TableNumberStorage();
   BellSuccessDialog({this.status});
   final String status;
 
-  @override
-  _BellSuccessDialogState createState() => _BellSuccessDialogState();
-}
-
-class _BellSuccessDialogState extends State<BellSuccessDialog> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

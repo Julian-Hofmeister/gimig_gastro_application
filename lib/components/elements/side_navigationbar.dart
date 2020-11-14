@@ -5,9 +5,6 @@ import 'package:gimig_gastro_application/screens/welcome_screen.dart';
 
 // TODO BETTER NAVIGATION
 class SideNavigationBar extends StatelessWidget {
-  SideNavigationBar({this.buttonActionNavigator});
-  final Function buttonActionNavigator;
-
   @override
   Widget build(BuildContext context) {
     return Column(

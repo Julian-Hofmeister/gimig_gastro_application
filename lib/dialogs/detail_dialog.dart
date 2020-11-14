@@ -21,9 +21,10 @@ class _DetailDialogState extends State<DetailDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-        Radius.circular(1),
-      )),
+        borderRadius: BorderRadius.all(
+          Radius.circular(1),
+        ),
+      ),
       contentPadding: EdgeInsets.all(0),
       content: Container(
         width: 700,
@@ -104,7 +105,7 @@ class _DetailDialogState extends State<DetailDialog> {
                             buttonHeight: 50,
                             buttonAction: () {
                               setState(() {
-                                if (widget.item.amount > 0) {
+                                if (widget.item.amount > 1) {
                                   widget.item.amount--;
                                 }
                               });
@@ -119,7 +120,7 @@ class _DetailDialogState extends State<DetailDialog> {
                             buttonHeight: 50,
                             buttonAction: () {
                               setState(() {
-                                if (widget.item.amount < 20) {
+                                if (widget.item.amount < 30) {
                                   widget.item.amount++;
                                 }
                               });

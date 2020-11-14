@@ -5,7 +5,7 @@ import 'package:gimig_gastro_application/dialogs/detail_dialog.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
 
 // ignore: must_be_immutable
-class OrderCard extends StatefulWidget {
+class OrderCard extends StatelessWidget {
   OrderCard({
     this.buttonAction,
     this.item,
@@ -16,18 +16,13 @@ class OrderCard extends StatefulWidget {
   bool state;
 
   @override
-  _OrderCardState createState() => _OrderCardState();
-}
-
-class _OrderCardState extends State<OrderCard> {
-  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         showDialog(
           context: context,
           builder: (_) => DetailDialog(
-            item: widget.item,
+            item: item,
             cartAccess: true,
           ),
         );
@@ -41,7 +36,7 @@ class _OrderCardState extends State<OrderCard> {
               width: 150,
               height: 180,
               foregroundDecoration: BoxDecoration(
-                color: widget.state == true
+                color: state == true
                     ? Colors.white.withOpacity(0.4)
                     : Colors.white.withOpacity(0),
               ),
@@ -51,7 +46,7 @@ class _OrderCardState extends State<OrderCard> {
                   Radius.circular(1),
                 ),
                 image: DecorationImage(
-                  image: AssetImage(widget.item.image),
+                  image: AssetImage(item.image),
                   fit: BoxFit.cover,
                 ),
                 boxShadow: [
@@ -71,7 +66,7 @@ class _OrderCardState extends State<OrderCard> {
               height: 180,
               width: 450,
               foregroundDecoration: BoxDecoration(
-                color: widget.state == true
+                color: state == true
                     ? Colors.white.withOpacity(0.4)
                     : Colors.white.withOpacity(0),
               ),
@@ -99,7 +94,7 @@ class _OrderCardState extends State<OrderCard> {
                         Container(
                           width: 400,
                           child: Text(
-                            widget.item.name,
+                            item.name,
                             style:
                                 kFoodCardTitleTextStyle.copyWith(fontSize: 22),
                             overflow: TextOverflow.ellipsis,
@@ -110,7 +105,7 @@ class _OrderCardState extends State<OrderCard> {
                           height: 30,
                         ),
                         Text(
-                          widget.item.price,
+                          item.price,
                           style: kFoodCardPriceTextStyle,
                         ),
                         SizedBox(
@@ -134,22 +129,18 @@ class _OrderCardState extends State<OrderCard> {
                     top: 140,
                     right: 100,
                     child: Text(
-                      "Menge:  ${widget.item.amount}",
+                      "Menge:  ${item.amount}",
                       style: kFoodCardPriceTextStyle,
                     ),
                   ),
                   GestureDetector(
                     onTap: () {
-                      setState(
-                        () {
-                          showDialog(
-                            context: context,
-                            builder: (_) => DetailDialog(
-                              item: widget.item,
-                              cartAccess: true,
-                            ),
-                          );
-                        },
+                      showDialog(
+                        context: context,
+                        builder: (_) => DetailDialog(
+                          item: item,
+                          cartAccess: true,
+                        ),
                       );
                     },
                     child: Align(
