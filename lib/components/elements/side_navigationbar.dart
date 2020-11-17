@@ -15,18 +15,18 @@ class SideNavigationBar extends StatelessWidget {
             Navigator.pop(context);
           },
           child: Container(
-            width: 80,
-            height: 80,
+            width: 100,
+            height: 100,
             color: kBackgroundColor.withOpacity(0),
             child: Icon(
               Icons.arrow_back_ios,
-              color: kAccentColor,
-              size: 40,
+              color: kDetailColor,
+              size: 50,
             ),
           ),
         ),
         SizedBox(
-          height: 250,
+          height: 300,
         ),
         GestureDetector(
             onTap: () {
@@ -35,39 +35,39 @@ class SideNavigationBar extends StatelessWidget {
               }
             },
             child: Container(
-                height: 80,
-                width: 80,
+                height: 100,
+                width: 100,
                 color: kBackgroundColor.withOpacity(0),
                 child: Icon(
                   Icons.home,
-                  size: 35,
-                  color: kAccentColor,
+                  size: 45,
+                  color: kDetailColor,
                 ))),
-        GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, WelcomeScreen.id);
-            },
-            child: Container(
-                height: 80,
-                width: 80,
-                color: kBackgroundColor.withOpacity(0),
-                child: Icon(
-                  Icons.notifications_active,
-                  size: 35,
-                  color: kAccentColor,
-                ))),
+        // GestureDetector(
+        //     onTap: () {
+        //       Navigator.pushNamed(context, WelcomeScreen.id);
+        //     },
+        //     child: Container(
+        //         height: 80,
+        //         width: 80,
+        //         color: kBackgroundColor.withOpacity(0),
+        //         child: Icon(
+        //           Icons.notifications_active,
+        //           size: 35,
+        //           color: kDetailColor,
+        //         ))),
         GestureDetector(
             onTap: () {
               Navigator.pushReplacementNamed(context, CartScreen.id);
             },
             child: Container(
-                height: 80,
-                width: 80,
+                height: 100,
+                width: 100,
                 color: kBackgroundColor.withOpacity(0),
                 child: Icon(
                   Icons.shopping_cart,
-                  size: 35,
-                  color: kAccentColor,
+                  size: 45,
+                  color: kDetailColor,
                 ))),
       ],
     );

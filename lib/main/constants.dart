@@ -52,11 +52,17 @@ const kButtonTextStyle = TextStyle(
 // const kBackgroundColor = Color(0xFFEEEEEE);
 // const kAccentColor = Color(0xFFF38D68);
 //
-const kBackgroundColor = Color(0xFF564E58);
-const kAccentColor = Color(0xFFD0A98F);
+//
 //
 // const kBackgroundColor = Color(0xFF564E58);
 // const kAccentColor = Color(0xFFC17767);
 // //
 // const kBackgroundColor = Color(0xFFECE2D0);
 // const kAccentColor = Color(0xFF846A6A);
+
+// const kBackgroundColor = Color(0xFF564E58);
+// const kAccentColor = Color(0xFFD0A98F);
+
+const kBackgroundColor = Color(0xFFEBEBEB);
+const kAccentColor = Color(0xFFEBAE90);
+const kDetailColor = Color(0xFF5D5D5D);

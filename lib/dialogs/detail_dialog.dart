@@ -22,28 +22,28 @@ class _DetailDialogState extends State<DetailDialog> {
     return AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(1),
+          Radius.circular(20),
         ),
       ),
       contentPadding: EdgeInsets.all(0),
       content: Container(
-        width: 700,
+        width: 800,
         height: 450,
         child: Stack(
           children: <Widget>[
             Positioned(
-              bottom: 150,
-              right: 00,
+              top: 0,
+              right: 0,
               child: Align(
                 alignment: Alignment.topRight,
                 child: Container(
-                  width: 270,
-                  height: 350,
+                  width: 250,
+                  height: 270,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(400),
-                      topLeft: Radius.circular(200),
-                      topRight: Radius.circular(6),
+                      bottomLeft: Radius.circular(230),
+                      topLeft: Radius.circular(60),
+                      topRight: Radius.circular(20),
                     ),
                     image: DecorationImage(
                         image: AssetImage(widget.item.image),
@@ -61,7 +61,7 @@ class _DetailDialogState extends State<DetailDialog> {
                   Column(
                     children: <Widget>[
                       Container(
-                        width: 300,
+                        width: 400,
                         alignment: Alignment.centerLeft,
                         child: Title(
                           child: Text(
@@ -77,13 +77,13 @@ class _DetailDialogState extends State<DetailDialog> {
                         height: 50,
                       ),
                       Container(
-                        width: 320,
+                        width: 400,
                         child: Text(
                           widget.item.description,
                           style: kFoodCardDescriptionTextStyle.copyWith(
                               fontSize: 20),
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
+                          maxLines: 4,
                         ),
                       ),
                     ],
@@ -91,15 +91,50 @@ class _DetailDialogState extends State<DetailDialog> {
                   SizedBox(
                     height: 80,
                   ),
-                  if (shoppingCart.shoppingList.contains(widget.item) &&
-                      widget.cartAccess == false)
-                    Text("befindet sich bereits im EInkaufswagen"),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Row(
                         children: <Widget>[
+                          if (widget.cartAccess == true)
+                            Row(
+                              children: [
+                                OrderButton(
+                                  buttonIcon: Icon(
+                                    Icons.delete,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                  buttonWidth: 50,
+                                  buttonHeight: 50,
+                                  buttonAction: () {
+                                    setState(() {
+                                      if (shoppingCart.shoppingList
+                                          .contains(widget.item)) {
+                                        shoppingCart.shoppingList
+                                            .remove(widget.item);
+                                      }
+                                      Navigator.pushReplacementNamed(
+                                        context,
+                                        CartScreen.id,
+                                      );
+                                    });
+                                  },
+                                ),
+                                Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 20),
+                                  height: 40,
+                                  width: 1,
+                                  color: Colors.grey,
+                                )
+                              ],
+                            ),
                           OrderButton(
+                            buttonIcon: Icon(
+                              Icons.remove,
+                              color: Colors.white,
+                              size: 20,
+                            ),
                             buttonName: "-",
                             buttonWidth: 50,
                             buttonHeight: 50,
@@ -115,6 +150,11 @@ class _DetailDialogState extends State<DetailDialog> {
                             width: 20,
                           ),
                           OrderButton(
+                            buttonIcon: Icon(
+                              Icons.add,
+                              color: Colors.white,
+                              size: 20,
+                            ),
                             buttonName: "+",
                             buttonWidth: 50,
                             buttonHeight: 50,
@@ -145,9 +185,8 @@ class _DetailDialogState extends State<DetailDialog> {
                         buttonAction: () {
                           setState(
                             () {
-                              Navigator.pop(context);
-
                               if (widget.cartAccess == false) {
+                                Navigator.pop(context);
                                 showDialog(
                                     context: (context),
                                     builder: (_) => GoOnDialog());

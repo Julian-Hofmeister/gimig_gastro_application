@@ -7,10 +7,10 @@ import 'package:gimig_gastro_application/components/elements/side_navigationbar.
 import 'package:gimig_gastro_application/main/constants.dart';
 
 // ignore: must_be_immutable
-class OverviewScreen extends StatelessWidget {
+class CategoryScreen extends StatelessWidget {
   static const String id = 'overview_screen';
 
-  OverviewScreen({this.category});
+  CategoryScreen({this.category});
   Category category;
 
   Widget build(BuildContext context) {
@@ -26,10 +26,8 @@ class OverviewScreen extends StatelessWidget {
           ScrollConfiguration(
             behavior: new ScrollBehavior()
               ..buildViewportChrome(context, null, AxisDirection.down),
-            child: GridView.count(
-              crossAxisCount: 2,
-              childAspectRatio: (300 / 370),
-              padding: EdgeInsets.only(top: 50, left: 90, right: 90),
+            child: ListView(
+              padding: EdgeInsets.only(top: 30, left: 125),
               children: List.generate(
                 category.items.length,
                 (index) => CategoryCard(

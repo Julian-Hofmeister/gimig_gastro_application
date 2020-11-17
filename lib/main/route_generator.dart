@@ -5,7 +5,7 @@ import 'package:gimig_gastro_application/screens/account/registration_screen.dar
 import 'package:gimig_gastro_application/screens/account/settings_screen.dart';
 import 'package:gimig_gastro_application/screens/big_card_screen.dart';
 import 'package:gimig_gastro_application/screens/cart_screen.dart';
-import 'package:gimig_gastro_application/screens/overview_screen.dart';
+import 'package:gimig_gastro_application/screens/category_screen.dart';
 import 'package:gimig_gastro_application/screens/small_card_screen.dart';
 import 'package:gimig_gastro_application/screens/welcome_screen.dart';
 
@@ -17,10 +17,10 @@ class RouteGenerator {
       case WelcomeScreen.id:
         return MaterialPageRoute(builder: (_) => WelcomeScreen());
 
-      case OverviewScreen.id:
+      case CategoryScreen.id:
         if (args is Category) {
           return MaterialPageRoute(
-            builder: (_) => OverviewScreen(
+            builder: (_) => CategoryScreen(
               category: args,
             ),
           );

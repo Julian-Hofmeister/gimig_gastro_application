@@ -1,6 +1,6 @@
 import 'package:gimig_gastro_application/classes/category_class.dart';
 import 'package:gimig_gastro_application/objects/items_example.dart';
-import 'package:gimig_gastro_application/screens/overview_screen.dart';
+import 'package:gimig_gastro_application/screens/category_screen.dart';
 import 'package:gimig_gastro_application/screens/small_card_screen.dart';
 
 //
@@ -44,7 +44,7 @@ Category starter = Category(
 Category mainCourse = Category(
   title: "Hauptspeisen",
   coverImage: "images/Hauptspeise1.png",
-  pushScreen: OverviewScreen.id,
+  pushScreen: CategoryScreen.id,
   items: [
     pasta,
     pizza,

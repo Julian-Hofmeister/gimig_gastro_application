@@ -6,7 +6,7 @@ class CustomTextButton extends StatelessWidget {
     @required this.buttonText,
     this.buttonAction,
     this.buttonHeight = 50,
-    this.buttonWidth = 350,
+    this.buttonWidth = 330,
     this.textSize = 22,
     this.textColor = Colors.black87,
     this.backgroundColor = Colors.white,
@@ -33,7 +33,7 @@ class CustomTextButton extends StatelessWidget {
         ),
         color: backgroundColor,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(3.0),
+          borderRadius: BorderRadius.circular(30.0),
         ),
       ),
     );

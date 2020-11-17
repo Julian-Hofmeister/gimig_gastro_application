@@ -15,7 +15,7 @@ class _ErrorDialogState extends State<ErrorDialog> {
     return AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(6),
+          Radius.circular(20),
         ),
       ),
       content: Container(
@@ -24,26 +24,26 @@ class _ErrorDialogState extends State<ErrorDialog> {
         color: Colors.white,
         child: Stack(
           children: [
-            if (widget.isOffline == true)
-              Center(
-                child: Text(
-                  "Es tut uns leid. Es scheint sie haben keine Internet Verbindung",
-                  style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.width / 55,
-                  ),
-                  textAlign: TextAlign.center,
+            // if (widget.isOffline == true)
+            Center(
+              child: Text(
+                "Es tut uns leid. Es scheint sie haben keine Internet Verbindung",
+                style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.width / 55,
                 ),
+                textAlign: TextAlign.center,
               ),
-            if (widget.isOffline == false)
-              Center(
-                child: Text(
-                  "Die Internet Verbindung wurde wieder hergestellt!",
-                  style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.width / 55,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
+            ),
+            // if (widget.isOffline == false)
+            //   Center(
+            //     child: Text(
+            //       "Die Internet Verbindung wurde wieder hergestellt!",
+            //       style: TextStyle(
+            //         fontSize: MediaQuery.of(context).size.width / 55,
+            //       ),
+            //       textAlign: TextAlign.center,
+            //     ),
+            //   ),
             Align(
               alignment: Alignment.bottomRight,
               child: FlatButton(

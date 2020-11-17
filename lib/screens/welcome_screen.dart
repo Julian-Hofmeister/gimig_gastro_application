@@ -15,7 +15,7 @@ import 'package:gimig_gastro_application/main/constants.dart';
 import 'package:gimig_gastro_application/objects/category_example.dart';
 import 'package:gimig_gastro_application/screens/account/settings_screen.dart';
 import 'package:gimig_gastro_application/screens/cart_screen.dart';
-import 'package:gimig_gastro_application/screens/overview_screen.dart';
+import 'package:gimig_gastro_application/screens/category_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const String id = 'welcome_screen';
@@ -29,6 +29,7 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  // ignore: unused_field
   StreamSubscription _connectionChangeStream;
   bool isOffline = false;
   Firestore _firestore = Firestore.instance;
@@ -215,7 +216,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
                       child: Container(
                         decoration:
-                            BoxDecoration(color: Colors.white.withOpacity(0.0)),
+                            BoxDecoration(color: Colors.black.withOpacity(0.1)),
                       ),
                     ),
                   ),
@@ -257,7 +258,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         Container(
-                          width: 700,
+                          width: 900,
                           child: GestureDetector(
                             onDoubleTap: () {
                               Navigator.pushNamed(context, SettingsScreen.id);
@@ -272,9 +273,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                   TextSpan(
                                       text: " Venezia",
                                       style: kMainTitleTextStyle.copyWith(
-                                        fontSize: 60,
+                                        fontSize: 70,
                                         fontWeight: FontWeight.bold,
-                                        letterSpacing: 2,
+                                        fontStyle: FontStyle.italic,
+                                        letterSpacing: 3,
                                       ))
                                 ],
                               ),
@@ -283,42 +285,55 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                         Column(
                           children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CustomTextButton(
+                                  textSize: 25,
+                                  buttonHeight: 55,
+                                  buttonText: "Getränke",
+                                  buttonAction: () {
+                                    Navigator.of(context).pushNamed(
+                                        CategoryScreen.id,
+                                        arguments: beverages);
+                                  },
+                                ),
+                                SizedBox(width: 30),
+                                CustomTextButton(
+                                  textSize: 25,
+                                  buttonHeight: 55,
+                                  buttonText: "Speisen",
+                                  buttonAction: () {
+                                    Navigator.of(context).pushNamed(
+                                      CategoryScreen.id,
+                                      arguments: courses,
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 30),
+                            // if (ableToPay == true)
                             CustomTextButton(
                               textSize: 25,
                               buttonHeight: 55,
-                              buttonText: "Getränke",
+                              buttonText: "Zahlen",
+                              backgroundColor: ableToPay == true
+                                  ? Colors.white
+                                  : Colors.white.withOpacity(1),
+                              textColor: ableToPay == true
+                                  ? Colors.black87
+                                  : Colors.black.withOpacity(0.5),
                               buttonAction: () {
-                                Navigator.of(context).pushNamed(
-                                    OverviewScreen.id,
-                                    arguments: beverages);
-                              },
-                            ),
-                            SizedBox(height: 20),
-                            CustomTextButton(
-                              textSize: 25,
-                              buttonHeight: 55,
-                              buttonText: "Speisen",
-                              buttonAction: () {
-                                Navigator.of(context).pushNamed(
-                                  OverviewScreen.id,
-                                  arguments: courses,
-                                );
-                              },
-                            ),
-                            SizedBox(height: 20),
-                            if (ableToPay == true)
-                              CustomTextButton(
-                                textSize: 25,
-                                buttonHeight: 55,
-                                buttonText: "Zahlen",
-                                buttonAction: () {
+                                if (ableToPay == true) {
                                   showDialog(
                                     context: context,
                                     builder: (_) =>
                                         PayDialog(tableNumber: tableNumber),
                                   );
-                                },
-                              ),
+                                }
+                              },
+                            ),
                           ],
                         ),
                       ],

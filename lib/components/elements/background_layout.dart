@@ -28,18 +28,16 @@ class BackgroundLayout extends StatelessWidget {
                 child: Stack(
                   children: <Widget>[
                     // Stroked text as border.
-                    Opacity(
-                      opacity: 0.09,
-                      child: Text(
-                        name,
-                        maxLines: 1,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: "Montserrat",
-                          fontWeight: FontWeight.bold,
-                          fontSize: 80,
-                          letterSpacing: 2,
-                        ),
+                    Text(
+                      name,
+                      maxLines: 1,
+                      style: TextStyle(
+                        color: Colors.black.withOpacity(0.08),
+                        fontFamily: "Montserrat",
+                        fontWeight: FontWeight.w800,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 60,
+                        letterSpacing: 6,
                       ),
                     ),
                   ],

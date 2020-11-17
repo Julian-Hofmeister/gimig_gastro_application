@@ -48,7 +48,7 @@ class _BellDialogState extends State<BellDialog> {
     return AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(6),
+          Radius.circular(20),
         ),
       ),
       content: Container(
@@ -71,7 +71,7 @@ class _BellDialogState extends State<BellDialog> {
                 textAlign: TextAlign.center,
               ),
             SizedBox(
-              height: 0,
+              height: 10,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -80,6 +80,9 @@ class _BellDialogState extends State<BellDialog> {
                   width: 200,
                   height: 50,
                   child: FlatButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(60),
+                    ),
                     color: kAccentColor,
                     splashColor: Colors.white,
                     highlightColor: Colors.grey,
@@ -97,6 +100,9 @@ class _BellDialogState extends State<BellDialog> {
                   width: 200,
                   height: 50,
                   child: OutlineButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(60),
+                    ),
                     borderSide: BorderSide(color: kAccentColor, width: 2),
                     color: Color(0xFFFF6633),
                     splashColor: Colors.white,

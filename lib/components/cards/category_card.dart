@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gimig_gastro_application/main/constants.dart';
 
 class CategoryCard extends StatelessWidget {
   CategoryCard({this.name, this.image, this.buttonAction});
@@ -12,15 +11,14 @@ class CategoryCard extends StatelessWidget {
     return GestureDetector(
       onTap: buttonAction,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        padding: const EdgeInsets.only(bottom: 60),
+        child: Stack(
           children: <Widget>[
             Container(
-              width: 360,
-              height: 317,
+              width: 650,
+              height: 350,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(1)),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
                 image: DecorationImage(
                     image: AssetImage(image), fit: BoxFit.cover),
                 boxShadow: [
@@ -32,31 +30,30 @@ class CategoryCard extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(1),
-                ),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    spreadRadius: 1,
-                    blurRadius: 6,
-                    offset: Offset(3, 3), // changes position of shadow
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 30),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(60),
+                      bottomLeft: Radius.circular(60),
+                    ),
+                    color: Colors.white,
                   ),
-                ],
-              ),
-              height: 90,
-              width: 360,
-              child: Center(
-                child: Text(
-                  name,
-                  style: kFoodCardTitleTextStyle,
+                  height: 55,
+                  width: 270,
+                  child: Center(
+                    child: Text(
+                      name,
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontFamily: "Montserrat",
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 1.2,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),

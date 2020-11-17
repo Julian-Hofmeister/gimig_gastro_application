@@ -36,7 +36,7 @@ class _PayDialogState extends State<PayDialog> {
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
-        Radius.circular(1),
+        Radius.circular(20),
       )),
       contentPadding: EdgeInsets.all(0),
       content: Container(
@@ -47,15 +47,15 @@ class _PayDialogState extends State<PayDialog> {
             Padding(
               padding: const EdgeInsets.all(50.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Container(
                         width: 300,
-                        alignment: Alignment.centerLeft,
+                        alignment: Alignment.center,
                         child: Title(
                           child: Text(
                             "Bezahlen",
@@ -97,7 +97,7 @@ class _PayDialogState extends State<PayDialog> {
                                     ? Colors.blueGrey
                                     : Colors.grey[300],
                                 borderRadius: BorderRadius.all(
-                                  Radius.circular(6),
+                                  Radius.circular(50),
                                 ),
                               ),
                               child: Center(
@@ -128,7 +128,7 @@ class _PayDialogState extends State<PayDialog> {
                                     ? Colors.blueGrey
                                     : Colors.grey[300],
                                 borderRadius: BorderRadius.all(
-                                  Radius.circular(6),
+                                  Radius.circular(50),
                                 ),
                               ),
                               child: Center(
@@ -164,7 +164,7 @@ class _PayDialogState extends State<PayDialog> {
                                     ? Colors.blueGrey
                                     : Colors.grey[300],
                                 borderRadius: BorderRadius.all(
-                                  Radius.circular(6),
+                                  Radius.circular(50),
                                 ),
                               ),
                               child: Center(
@@ -196,7 +196,7 @@ class _PayDialogState extends State<PayDialog> {
                                     ? Colors.blueGrey
                                     : Colors.grey[300],
                                 borderRadius: BorderRadius.all(
-                                  Radius.circular(6),
+                                  Radius.circular(50),
                                 ),
                               ),
                               child: Center(
@@ -226,18 +226,17 @@ class _PayDialogState extends State<PayDialog> {
                             width: 430,
                             height: 50,
                             decoration: BoxDecoration(
-                              color: Colors.deepOrangeAccent,
+                              color: kAccentColor,
                               borderRadius: BorderRadius.all(
-                                Radius.circular(6),
+                                Radius.circular(50),
                               ),
                             ),
                             child: Center(
-                              child: Text(
-                                "Bedieung rufen",
-                                style: kFoodCardDescriptionTextStyle.copyWith(
-                                  color: Colors.black87,
-                                ),
-                              ),
+                              child: Text("Bedieung rufen",
+                                  style: kFoodCardDescriptionTextStyle.copyWith(
+                                      fontSize: 22,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold)),
                             ),
                           ),
                         ),

@@ -10,7 +10,7 @@ import 'package:gimig_gastro_application/components/elements/text_button.dart';
 import 'package:gimig_gastro_application/functions/table_number_storage.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
 import 'package:gimig_gastro_application/objects/category_example.dart';
-import 'package:gimig_gastro_application/screens/overview_screen.dart';
+import 'package:gimig_gastro_application/screens/category_screen.dart';
 
 class CartScreen extends StatefulWidget {
   static const String id = 'cart_screen';
@@ -100,7 +100,7 @@ class _CartScreenState extends State<CartScreen> {
             axisDirection: AxisDirection.down,
             color: kScrollEffect,
             child: ListView(
-              padding: EdgeInsets.only(top: 50, right: 100),
+              padding: EdgeInsets.only(top: 50, left: 125),
               children: <Widget>[
                 ListView(
                   shrinkWrap: true,
@@ -113,8 +113,8 @@ class _CartScreenState extends State<CartScreen> {
                 ),
                 if (shoppingCart.shoppingList.length > 0)
                   Padding(
-                    padding: const EdgeInsets.only(
-                        left: 160, right: 160, top: 50, bottom: 80),
+                    padding:
+                        const EdgeInsets.only(top: 50, bottom: 40, right: 200),
                     child: CustomTextButton(
                       buttonText: "Bestellung Abschließen",
                       buttonAction: order,
@@ -123,7 +123,8 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ),
                 if (shoppingCart.shoppingList.length == 0)
-                  SizedBox(
+                  Container(
+                    padding: EdgeInsets.only(top: 50, bottom: 40, right: 200),
                     height: 500,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -133,7 +134,7 @@ class _CartScreenState extends State<CartScreen> {
                           child: Text(
                             "Sie haben noch keine Getränke oder Speisen gewählt.",
                             style: kFoodCardPriceTextStyle.copyWith(
-                                fontSize: 22, color: kFontColor2),
+                                fontSize: 22, color: kDetailColor),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                             textAlign: TextAlign.center,
@@ -146,7 +147,7 @@ class _CartScreenState extends State<CartScreen> {
                           backgroundColor: kAccentColor,
                           textColor: Colors.white,
                           buttonAction: () {
-                            Navigator.of(context).pushNamed(OverviewScreen.id,
+                            Navigator.of(context).pushNamed(CategoryScreen.id,
                                 arguments: beverages);
                           },
                         ),
@@ -157,7 +158,7 @@ class _CartScreenState extends State<CartScreen> {
                           backgroundColor: kAccentColor,
                           textColor: Colors.white,
                           buttonAction: () {
-                            Navigator.of(context).pushNamed(OverviewScreen.id,
+                            Navigator.of(context).pushNamed(CategoryScreen.id,
                                 arguments: courses);
                           },
                         ),
@@ -166,7 +167,7 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 if (shoppingCart.orderdList.length > 0)
                   Padding(
-                    padding: const EdgeInsets.only(left: 153.0, top: 50),
+                    padding: const EdgeInsets.only(top: 50, bottom: 20),
                     child: Text(
                       "Bereits bestellt:",
                       style: kFoodCardTitleTextStyle.copyWith(
