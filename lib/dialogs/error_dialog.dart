@@ -27,7 +27,7 @@ class _ErrorDialogState extends State<ErrorDialog> {
             // if (widget.isOffline == true)
             Center(
               child: Text(
-                "Es tut uns leid. Es scheint sie haben keine Internet Verbindung",
+                "Es tut uns leid. Es scheint sie haben keine Internetverbindung.",
                 style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width / 55,
                 ),
@@ -51,7 +51,7 @@ class _ErrorDialogState extends State<ErrorDialog> {
                   Navigator.pop(context);
                 },
                 child: Text(
-                  "close",
+                  "schließen",
                   style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width / 55,
                     color: Colors.black54,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gimig_gastro_application/functions/connection_check.dart';
 import 'package:gimig_gastro_application/functions/firebase_functions.dart';
 import 'package:gimig_gastro_application/main/route_generator.dart';
 import 'package:gimig_gastro_application/screens/welcome_screen.dart';
@@ -16,10 +15,6 @@ class MyBehavior extends ScrollBehavior {
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIOverlays([]);
-
-  ConnectionStatusSingleton connectionStatus =
-      ConnectionStatusSingleton.getInstance();
-  connectionStatus.initialize();
 
   runApp(MyApp());
 }

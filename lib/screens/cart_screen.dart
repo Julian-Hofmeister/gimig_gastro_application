@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gimig_gastro_application/classes/item_class.dart';
@@ -7,6 +8,7 @@ import 'package:gimig_gastro_application/components/cards/order_card.dart';
 import 'package:gimig_gastro_application/components/elements/background_layout.dart';
 import 'package:gimig_gastro_application/components/elements/side_navigationbar.dart';
 import 'package:gimig_gastro_application/components/elements/text_button.dart';
+import 'package:gimig_gastro_application/dialogs/error_dialog.dart';
 import 'package:gimig_gastro_application/functions/table_number_storage.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
 import 'package:gimig_gastro_application/objects/category_example.dart';
@@ -43,48 +45,55 @@ class _CartScreenState extends State<CartScreen> {
 
   // TODO SEND SAME ITEMS TOGETHER
   // SEND ORDER
-  void order() {
-    // GET CURRENT TIME
-    getTime();
+  void order() async {
+    if (await DataConnectionChecker().hasConnection != true) {
+      await showDialog(
+        context: context,
+        builder: (_) => ErrorDialog(),
+      );
+    } else {
+      // GET CURRENT TIME
+      getTime();
 
-    // ADD EACH ITEM TO ORDERS
-    for (Item item in shoppingCart.shoppingList) {
+      // ADD EACH ITEM TO ORDERS
+      for (Item item in shoppingCart.shoppingList) {
+        _firestore
+            .collection("restaurants")
+            .document("venezia")
+            .collection("tables")
+            .document("$tableNumber")
+            .collection("orders")
+            .add({
+          "name": item.name,
+          "amount": item.amount,
+          "price": item.price,
+          "tableNumber": tableNumber,
+          "timestamp": timestamp,
+          "isFood": item.isFood,
+          "inProgress": false,
+          "isPaid": false,
+        });
+      }
+
+      // SEND ORDER REQUEST
       _firestore
           .collection("restaurants")
           .document("venezia")
           .collection("tables")
           .document("$tableNumber")
-          .collection("orders")
-          .add({
-        "name": item.name,
-        "amount": item.amount,
-        "price": item.price,
+          .setData({
         "tableNumber": tableNumber,
-        "timestamp": timestamp,
-        "isFood": item.isFood,
-        "inProgress": false,
-        "isPaid": false,
+        "status": "orderRequest",
+      });
+
+      // CLEAR SHOPPING CART
+      setState(() {
+        for (Item item in shoppingCart.shoppingList) {
+          shoppingCart.orderdList.insert(0, item);
+        }
+        shoppingCart.shoppingList.clear();
       });
     }
-
-    // SEND ORDER REQUEST
-    _firestore
-        .collection("restaurants")
-        .document("venezia")
-        .collection("tables")
-        .document("$tableNumber")
-        .setData({
-      "tableNumber": tableNumber,
-      "status": "orderRequest",
-    });
-
-    // CLEAR SHOPPING CART
-    setState(() {
-      for (Item item in shoppingCart.shoppingList) {
-        shoppingCart.orderdList.insert(0, item);
-      }
-      shoppingCart.shoppingList.clear();
-    });
   }
 
   Widget build(BuildContext context) {

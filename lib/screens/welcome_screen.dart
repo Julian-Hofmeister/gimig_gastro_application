@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:gimig_gastro_application/components/elements/text_button.dart';
 import 'package:gimig_gastro_application/components/messages/message1.dart';
 import 'package:gimig_gastro_application/dialogs/bell_dialog.dart';
-import 'package:gimig_gastro_application/dialogs/error_dialog.dart';
 import 'package:gimig_gastro_application/dialogs/pay_dialog.dart';
 import 'package:gimig_gastro_application/functions/connection_check.dart';
 import 'package:gimig_gastro_application/functions/table_number_storage.dart';
@@ -30,7 +29,7 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   // ignore: unused_field
-  StreamSubscription _connectionChangeStream;
+  // StreamSubscription _connectionChangeStream;
   bool isOffline = false;
   Firestore _firestore = Firestore.instance;
   String tableMessage;
@@ -95,28 +94,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   // TODO DARKEN DISPLAY AFTER 5MIN
 
-  // ON CONNECTION CHANGE
-  void connectionChanged(dynamic hasConnection) {
-    setState(() {
-      isOffline = !hasConnection;
-      showDialog(
-        context: context,
-        builder: (_) => ErrorDialog(
-          isOffline: isOffline,
-        ),
-      );
-    });
-  }
-
   @override
   void initState() {
     super.initState();
 
-    // LISTEN TO CONNECTION
-    ConnectionStatusSingleton connectionStatus =
-        ConnectionStatusSingleton.getInstance();
-    _connectionChangeStream =
-        connectionStatus.connectionChange.listen(connectionChanged);
+    listenToConnection(context);
 
     widget.storage.readTableNumber().then((int value) {
       setState(() {
