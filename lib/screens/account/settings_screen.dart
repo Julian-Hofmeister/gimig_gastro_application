@@ -33,8 +33,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Navigator.pop(context);
               },
               child: Container(
-                width: 80,
-                height: 80,
+                width: MediaQuery.of(context).size.width * 0.08,
+                height: MediaQuery.of(context).size.width * 0.08,
                 color: kBackgroundColor.withOpacity(0),
                 child: Icon(
                   Icons.arrow_back_ios,

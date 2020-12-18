@@ -25,7 +25,9 @@ class SmallCardScreen extends StatelessWidget {
             axisDirection: AxisDirection.down,
             color: kScrollEffect,
             child: ListView(
-              padding: EdgeInsets.only(top: 30, left: 125),
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.width * 0.03,
+                  left: MediaQuery.of(context).size.width * 0.12),
               children: List.generate(
                 category.items.length,
                 (index) => SmallCard(

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gimig_gastro_application/components/elements/text_button.dart';
@@ -28,26 +29,26 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  // ignore: unused_field
-  // StreamSubscription _connectionChangeStream;
-  bool isOffline = false;
-  Firestore _firestore = Firestore.instance;
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   String tableMessage;
   int tableNumber;
   String status;
   bool ableToPay;
+
+  String currentUserEmail = FirebaseAuth.instance.currentUser.email;
 
   Future<void> checkMessage({documentID}) async {
     print("MESSAGE!!!");
 
     await _firestore
         .collection("restaurants")
-        .document("venezia")
+        .doc("$currentUserEmail")
         .collection("tables")
-        .document("$tableNumber")
+        .doc("$tableNumber")
         .collection("messages")
-        .document("$documentID")
-        .updateData({"state": true});
+        .doc("$documentID")
+        .update({"state": true});
     showMessage();
   }
 
@@ -56,13 +57,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       return Icon(
         Icons.notifications_active,
         color: Colors.white,
-        size: 40,
+        size: MediaQuery.of(context).size.width * 0.04,
       );
     }
     return Icon(
       Icons.check,
       color: Colors.white,
-      size: 40,
+      size: MediaQuery.of(context).size.width * 0.04,
     );
   }
 
@@ -80,14 +81,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       });
     });
     print("Tablenumber $tableNumber");
-    var snapshot = await Firestore.instance
+    var snapshot = await FirebaseFirestore.instance
         .collection('restaurants')
-        .document('venezia')
+        .doc('$currentUserEmail')
         .collection('tables')
-        .document("$tableNumber")
+        .doc("$tableNumber")
         .get();
 
-    status = snapshot.data["status"];
+    status = snapshot.data()["status"];
     print("STATUS: $status");
     return status;
   }
@@ -117,9 +118,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         //STREAM
         stream: _firestore
             .collection("restaurants")
-            .document("venezia")
+            .doc("$currentUserEmail")
             .collection("tables")
-            .document("$tableNumber")
+            .doc("$tableNumber")
             .collection("messages")
             .snapshots(),
         builder: (context, snapshot) {
@@ -130,13 +131,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
             );
           }
-          final messages = snapshot.data.documents;
+          final messages = snapshot.data.docs;
 
           //LISTEN TO MESSAGES
           for (var document in messages) {
-            final documentID = document.documentID;
-            final message = document.data['message'];
-            final state = document.data['state'];
+            final documentID = document.id;
+            final message = document.data()['message'];
+            final state = document.data()['state'];
 
             if (message == "message1" && state != true) {
               tableMessage = message;
@@ -150,7 +151,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             //STREAM
             stream: _firestore
                 .collection("restaurants")
-                .document("venezia")
+                .doc("$currentUserEmail")
                 .collection("tables")
                 .snapshots(),
             builder: (context, snapshot) {
@@ -161,13 +162,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                 );
               }
-              final calls = snapshot.data.documents;
+              final calls = snapshot.data.docs;
 
               //LISTEN TO TABLE
               for (var document in calls) {
-                final documentID = document.documentID;
-                final tableStatus = document.data['status'];
-                var tableAbleToPay = document.data['ableToPay'];
+                final documentID = document.id;
+                final tableStatus = document.data()['status'];
+                var tableAbleToPay = document.data()['ableToPay'];
 
                 // CHECK STATUS
                 if (documentID == tableNumber.toString()) {
@@ -213,9 +214,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           ),
                         );
                       },
-                      child: Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: checkIcon(),
+                      child: Container(
+                        color: Colors.white.withOpacity(0),
+                        height: MediaQuery.of(context).size.width * 0.1,
+                        width: MediaQuery.of(context).size.width * 0.1,
+                        child: Padding(
+                          padding: EdgeInsets.all(
+                            MediaQuery.of(context).size.width * 0.03,
+                          ),
+                          child: checkIcon(),
+                        ),
                       ),
                     ),
                   ),
@@ -225,12 +233,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       onTap: () {
                         Navigator.pushNamed(context, CartScreen.id);
                       },
-                      child: Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: Icon(
-                          Icons.shopping_cart,
-                          color: Colors.white,
-                          size: 40,
+                      child: Container(
+                        color: Colors.white.withOpacity(0),
+                        height: MediaQuery.of(context).size.width * 0.1,
+                        width: MediaQuery.of(context).size.width * 0.1,
+                        child: Padding(
+                          padding: EdgeInsets.all(
+                              MediaQuery.of(context).size.width * 0.03),
+                          child: Icon(
+                            Icons.shopping_cart,
+                            color: Colors.white,
+                            size: MediaQuery.of(context).size.width * 0.04,
+                          ),
                         ),
                       ),
                     ),
@@ -240,7 +254,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         Container(
-                          width: 900,
+                          width: MediaQuery.of(context).size.width,
                           child: GestureDetector(
                             onDoubleTap: () {
                               Navigator.pushNamed(context, SettingsScreen.id);
@@ -255,7 +269,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                   TextSpan(
                                       text: " Venezia",
                                       style: kMainTitleTextStyle.copyWith(
-                                        fontSize: 70,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.068,
                                         fontWeight: FontWeight.bold,
                                         fontStyle: FontStyle.italic,
                                         letterSpacing: 3,
@@ -271,8 +287,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 CustomTextButton(
-                                  textSize: 25,
-                                  buttonHeight: 55,
+                                  textSize:
+                                      MediaQuery.of(context).size.width * 0.025,
+                                  buttonHeight:
+                                      MediaQuery.of(context).size.width * 0.055,
+                                  buttonWidth:
+                                      MediaQuery.of(context).size.width * 0.32,
                                   buttonText: "Getränke",
                                   buttonAction: () {
                                     Navigator.of(context).pushNamed(
@@ -280,10 +300,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                         arguments: beverages);
                                   },
                                 ),
-                                SizedBox(width: 30),
+                                SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.03),
                                 CustomTextButton(
-                                  textSize: 25,
-                                  buttonHeight: 55,
+                                  textSize:
+                                      MediaQuery.of(context).size.width * 0.025,
+                                  buttonHeight:
+                                      MediaQuery.of(context).size.width * 0.055,
+                                  buttonWidth:
+                                      MediaQuery.of(context).size.width * 0.32,
                                   buttonText: "Speisen",
                                   buttonAction: () {
                                     Navigator.of(context).pushNamed(
@@ -294,11 +320,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 30),
-                            // if (ableToPay == true)
+                            SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.width * 0.03),
                             CustomTextButton(
-                              textSize: 25,
-                              buttonHeight: 55,
+                              textSize:
+                                  MediaQuery.of(context).size.width * 0.025,
+                              buttonHeight:
+                                  MediaQuery.of(context).size.width * 0.055,
+                              buttonWidth:
+                                  MediaQuery.of(context).size.width * 0.32,
                               buttonText: "Zahlen",
                               backgroundColor: ableToPay == true
                                   ? Colors.white

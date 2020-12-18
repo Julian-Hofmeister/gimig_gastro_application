@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gimig_gastro_application/classes/category_class.dart';
+import 'package:gimig_gastro_application/main.dart';
 import 'package:gimig_gastro_application/screens/account/login_screen.dart';
 import 'package:gimig_gastro_application/screens/account/registration_screen.dart';
 import 'package:gimig_gastro_application/screens/account/settings_screen.dart';
@@ -14,6 +15,9 @@ class RouteGenerator {
     final args = settings.arguments;
 
     switch (settings.name) {
+      case AuthenticationWrapper.id:
+        return MaterialPageRoute(builder: (_) => AuthenticationWrapper());
+
       case WelcomeScreen.id:
         return MaterialPageRoute(builder: (_) => WelcomeScreen());
 

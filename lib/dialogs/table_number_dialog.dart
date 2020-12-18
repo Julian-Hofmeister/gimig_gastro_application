@@ -45,14 +45,15 @@ class _TableNumberDialogState extends State<TableNumberDialog> {
         ),
       ),
       content: Container(
-        width: 630,
-        height: 350,
+        width: MediaQuery.of(context).size.width * 0.63,
+        height: MediaQuery.of(context).size.width * 0.35,
         color: Colors.white,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 100),
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 0.1),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -66,10 +67,12 @@ class _TableNumberDialogState extends State<TableNumberDialog> {
                     data: theme.copyWith(
                         accentColor: kAccentColor, // highlted color
                         textTheme: theme.textTheme.copyWith(
-                          headline5: theme.textTheme.headline5
-                              .copyWith(fontSize: 30), //other highlighted style
-                          bodyText2: theme.textTheme.headline5
-                              .copyWith(fontSize: 25), //not highlighted styles
+                          headline5: theme.textTheme.headline5.copyWith(
+                              fontSize: MediaQuery.of(context).size.width *
+                                  0.03), //other highlighted style
+                          bodyText2: theme.textTheme.headline5.copyWith(
+                              fontSize: MediaQuery.of(context).size.width *
+                                  0.025), //not highlighted styles
                         )),
                     child: NumberPicker.integer(
                       initialValue: tableNumber,
@@ -105,12 +108,14 @@ class _TableNumberDialogState extends State<TableNumberDialog> {
               highlightedBorderColor: kAccentColor,
               borderSide: BorderSide(color: kAccentColor, width: 2),
               child: Container(
-                height: 60,
-                width: 250,
+                height: MediaQuery.of(context).size.width * 0.06,
+                width: MediaQuery.of(context).size.width * 0.25,
                 child: Center(
                   child: Text(
                     "Auswählen",
-                    style: TextStyle(color: kFontColor1, fontSize: 25),
+                    style: TextStyle(
+                        color: kFontColor1,
+                        fontSize: MediaQuery.of(context).size.width * 0.025),
                   ),
                 ),
               ),

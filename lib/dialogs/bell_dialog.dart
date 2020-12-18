@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gimig_gastro_application/dialogs/bell_success_dialog.dart';
 import 'package:gimig_gastro_application/functions/table_number_storage.dart';
@@ -16,9 +17,9 @@ class BellDialog extends StatefulWidget {
 class _BellDialogState extends State<BellDialog> {
   int tableNumber;
 
-  final _firestore = Firestore.instance
+  final _firestore = FirebaseFirestore.instance
       .collection("restaurants")
-      .document("venezia")
+      .doc("${FirebaseAuth.instance.currentUser.email}")
       .collection("tables");
 
   Future<void> callService() async {
@@ -38,9 +39,7 @@ class _BellDialogState extends State<BellDialog> {
     });
 
     //UPDATE STATUS
-    await _firestore
-        .document("$tableNumber")
-        .updateData({"status": "calledService"});
+    await _firestore.doc("$tableNumber").update({"status": "calledService"});
   }
 
   @override

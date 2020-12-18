@@ -12,7 +12,7 @@ const kFontColor2 = Colors.white;
 const kMainTitleTextStyle = TextStyle(
   color: kFontColor2,
   fontFamily: "PlayfairDisplay",
-  fontSize: 70.0,
+  fontSize: 70,
   letterSpacing: 3,
 );
 

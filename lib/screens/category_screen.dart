@@ -27,7 +27,9 @@ class CategoryScreen extends StatelessWidget {
             behavior: new ScrollBehavior()
               ..buildViewportChrome(context, null, AxisDirection.down),
             child: ListView(
-              padding: EdgeInsets.only(top: 30, left: 125),
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.width * 0.03,
+                  left: MediaQuery.of(context).size.width * 0.12),
               children: List.generate(
                 category.items.length,
                 (index) => CategoryCard(

@@ -27,7 +27,7 @@ class BellSuccessDialog extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Text(
-                "Es wurde erfolgrecih eine Bedienung gerufen",
+                "Es wurde erfolgreich eine Bedienung gerufen",
                 style: kFoodCardDescriptionTextStyle.copyWith(fontSize: 22),
                 textAlign: TextAlign.center,
               ),

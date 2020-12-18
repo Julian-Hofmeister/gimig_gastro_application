@@ -7,24 +7,24 @@ class FirebaseFunctions {
   final _auth = FirebaseAuth.instance;
 
   // ignore: missing_return
-  Future getCurrentUser() async {
-    try {
-      final user = await _auth.currentUser();
-      if (user != null) {
-        return user;
-      }
-    } catch (e) {
-      print(e);
-      return null;
-    }
-  }
+  // Future getCurrentUser() async {
+  //   try {
+  //     final user = await _auth.currentUser();
+  //     if (user != null) {
+  //       return user;
+  //     }
+  //   } catch (e) {
+  //     print(e);
+  //     return null;
+  //   }
+  // }
 
-  bool checkAccount(context) {
-    if (getCurrentUser() != null) {
-      return true;
-    }
-    return false;
-  }
+  // bool checkAccount(context) {
+  //   if (getCurrentUser() != null) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   Future<void> login(context, email, password) async {
     try {

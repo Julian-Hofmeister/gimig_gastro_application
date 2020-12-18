@@ -20,12 +20,12 @@ class _PayDialogState extends State<PayDialog> {
   bool isCache;
 
   Future sendPayRequest({tableNumber}) async {
-    await Firestore.instance
+    await FirebaseFirestore.instance
         .collection('restaurants')
-        .document('venezia')
+        .doc('venezia')
         .collection('tables')
-        .document("$tableNumber")
-        .updateData({
+        .doc("$tableNumber")
+        .update({
       "status": "payRequest",
       "isTogether": isTogether,
       "isCache": isCache
@@ -36,16 +36,16 @@ class _PayDialogState extends State<PayDialog> {
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
-        Radius.circular(20),
+        Radius.circular(MediaQuery.of(context).size.width * 0.02),
       )),
       contentPadding: EdgeInsets.all(0),
       content: Container(
-        width: 700,
-        height: 450,
+        width: MediaQuery.of(context).size.width * 0.7,
+        height: MediaQuery.of(context).size.width * 0.45,
         child: Stack(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(50.0),
+              padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,19 +67,21 @@ class _PayDialogState extends State<PayDialog> {
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: MediaQuery.of(context).size.width * 0.01,
                       ),
                       Container(
-                        width: 500,
+                        width: MediaQuery.of(context).size.width * 0.05,
                         child: Text(
                           "Für das Bezahlen wird eine Bedienung gerufen. Bitte geben sie an wie sie bezahlen möchten.",
                           style: kFoodCardDescriptionTextStyle.copyWith(
-                              fontSize: 20),
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.02),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 3,
                         ),
                       ),
-                      SizedBox(height: 40),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.width * 0.04),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -90,14 +92,15 @@ class _PayDialogState extends State<PayDialog> {
                               });
                             },
                             child: Container(
-                              width: 200,
-                              height: 50,
+                              width: MediaQuery.of(context).size.width * 0.2,
+                              height: MediaQuery.of(context).size.width * 0.05,
                               decoration: BoxDecoration(
                                 color: isTogether == true
                                     ? Colors.blueGrey
                                     : Colors.grey[300],
                                 borderRadius: BorderRadius.all(
-                                  Radius.circular(50),
+                                  Radius.circular(
+                                      MediaQuery.of(context).size.width * 0.05),
                                 ),
                               ),
                               child: Center(
@@ -112,7 +115,7 @@ class _PayDialogState extends State<PayDialog> {
                             ),
                           ),
                           SizedBox(
-                            width: 30,
+                            width: MediaQuery.of(context).size.width * 0.03,
                           ),
                           GestureDetector(
                             onTap: () {
@@ -121,14 +124,15 @@ class _PayDialogState extends State<PayDialog> {
                               });
                             },
                             child: Container(
-                              width: 200,
-                              height: 50,
+                              width: MediaQuery.of(context).size.width * 0.2,
+                              height: MediaQuery.of(context).size.width * 0.05,
                               decoration: BoxDecoration(
                                 color: isTogether == false
                                     ? Colors.blueGrey
                                     : Colors.grey[300],
                                 borderRadius: BorderRadius.all(
-                                  Radius.circular(50),
+                                  Radius.circular(
+                                      MediaQuery.of(context).size.width * 0.05),
                                 ),
                               ),
                               child: Center(
@@ -145,7 +149,7 @@ class _PayDialogState extends State<PayDialog> {
                         ],
                       ),
                       SizedBox(
-                        height: 30,
+                        height: MediaQuery.of(context).size.width * 0.03,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -157,14 +161,15 @@ class _PayDialogState extends State<PayDialog> {
                               });
                             },
                             child: Container(
-                              width: 200,
-                              height: 50,
+                              width: MediaQuery.of(context).size.width * 0.02,
+                              height: MediaQuery.of(context).size.width * 0.05,
                               decoration: BoxDecoration(
                                 color: isCache == true
                                     ? Colors.blueGrey
                                     : Colors.grey[300],
                                 borderRadius: BorderRadius.all(
-                                  Radius.circular(50),
+                                  Radius.circular(
+                                      MediaQuery.of(context).size.width * 0.05),
                                 ),
                               ),
                               child: Center(
@@ -180,7 +185,7 @@ class _PayDialogState extends State<PayDialog> {
                             ),
                           ),
                           SizedBox(
-                            width: 30,
+                            width: MediaQuery.of(context).size.width * 0.03,
                           ),
                           GestureDetector(
                             onTap: () {
@@ -189,14 +194,15 @@ class _PayDialogState extends State<PayDialog> {
                               });
                             },
                             child: Container(
-                              width: 200,
-                              height: 50,
+                              width: MediaQuery.of(context).size.width * 0.2,
+                              height: MediaQuery.of(context).size.width * 0.05,
                               decoration: BoxDecoration(
                                 color: isCache == false
                                     ? Colors.blueGrey
                                     : Colors.grey[300],
                                 borderRadius: BorderRadius.all(
-                                  Radius.circular(50),
+                                  Radius.circular(
+                                      MediaQuery.of(context).size.width * 0.05),
                                 ),
                               ),
                               child: Center(
@@ -214,7 +220,7 @@ class _PayDialogState extends State<PayDialog> {
                         ],
                       ),
                       SizedBox(
-                        height: 30,
+                        height: MediaQuery.of(context).size.width * 0.03,
                       ),
                       Center(
                         child: GestureDetector(
@@ -223,18 +229,21 @@ class _PayDialogState extends State<PayDialog> {
                             sendPayRequest(tableNumber: widget.tableNumber);
                           },
                           child: Container(
-                            width: 430,
-                            height: 50,
+                            width: MediaQuery.of(context).size.width * 0.43,
+                            height: MediaQuery.of(context).size.width * 0.05,
                             decoration: BoxDecoration(
                               color: kAccentColor,
                               borderRadius: BorderRadius.all(
-                                Radius.circular(50),
+                                Radius.circular(
+                                    MediaQuery.of(context).size.width * 0.05),
                               ),
                             ),
                             child: Center(
                               child: Text("Bedieung rufen",
                                   style: kFoodCardDescriptionTextStyle.copyWith(
-                                      fontSize: 22,
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.022,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold)),
                             ),

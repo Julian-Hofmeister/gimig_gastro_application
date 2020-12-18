@@ -25,7 +25,9 @@ class BigCardScreen extends StatelessWidget {
             axisDirection: AxisDirection.down,
             color: kScrollEffect,
             child: GridView.count(
-              padding: EdgeInsets.only(top: 50, left: 60, right: 60),
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.width * 0.03,
+                  left: MediaQuery.of(context).size.width * 0.12),
               crossAxisCount: 2,
               childAspectRatio: (300 / 370),
               children: List.generate(
