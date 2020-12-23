@@ -7,6 +7,7 @@ import 'package:gimig_gastro_application/screens/account/settings_screen.dart';
 import 'package:gimig_gastro_application/screens/big_card_screen.dart';
 import 'package:gimig_gastro_application/screens/cart_screen.dart';
 import 'package:gimig_gastro_application/screens/category_screen.dart';
+import 'package:gimig_gastro_application/screens/daily_menu_screen_beta.dart';
 import 'package:gimig_gastro_application/screens/small_card_screen.dart';
 import 'package:gimig_gastro_application/screens/welcome_screen.dart';
 
@@ -45,6 +46,16 @@ class RouteGenerator {
         if (args is Category) {
           return MaterialPageRoute(
             builder: (_) => SmallCardScreen(
+              category: args,
+            ),
+          );
+        }
+        return _errorRoute();
+
+      case DailyMenuBetaScreen.id:
+        if (args is Category) {
+          return MaterialPageRoute(
+            builder: (_) => DailyMenuBetaScreen(
               category: args,
             ),
           );

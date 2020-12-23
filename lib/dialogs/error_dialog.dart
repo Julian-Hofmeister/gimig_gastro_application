@@ -13,7 +13,9 @@ class _ErrorDialogState extends State<ErrorDialog> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () {},
+      onWillPop: () {
+        return null;
+      },
       child: AlertDialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(

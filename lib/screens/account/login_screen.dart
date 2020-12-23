@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gimig_gastro_application/functions/authentication_servie.dart';
+import 'package:gimig_gastro_application/services/authentication_servie.dart';
 import 'package:gimig_gastro_application/screens/account/registration_screen.dart';
 import 'package:provider/provider.dart';
 

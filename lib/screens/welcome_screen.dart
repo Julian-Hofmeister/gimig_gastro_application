@@ -14,8 +14,8 @@ import 'package:gimig_gastro_application/functions/table_number_storage.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
 import 'package:gimig_gastro_application/objects/category_example.dart';
 import 'package:gimig_gastro_application/screens/account/settings_screen.dart';
-import 'package:gimig_gastro_application/screens/cart_screen.dart';
 import 'package:gimig_gastro_application/screens/category_screen.dart';
+import 'package:gimig_gastro_application/screens/daily_menu_screen_beta.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const String id = 'welcome_screen';
@@ -231,7 +231,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     alignment: Alignment.bottomLeft,
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, CartScreen.id);
+                        Navigator.pushNamed(context, DailyMenuBetaScreen.id);
                       },
                       child: Container(
                         color: Colors.white.withOpacity(0),

@@ -46,9 +46,22 @@ class _DetailDialogState extends State<DetailDialog> {
                       topRight: Radius.circular(20),
                     ),
                     image: DecorationImage(
-                        image: AssetImage(widget.item.image),
-                        fit: BoxFit.cover),
+                      image: AssetImage(
+                        widget.item.image,
+                      ),
+                      fit: BoxFit.cover,
+                    ),
                   ),
+                  child: widget.item.imageFile != null
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(230),
+                            topLeft: Radius.circular(60),
+                            topRight: Radius.circular(20),
+                          ),
+                          child: widget.item.imageFile,
+                        )
+                      : null,
                 ),
               ),
             ),
