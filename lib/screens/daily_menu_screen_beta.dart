@@ -28,8 +28,10 @@ class _DailyMenuBetaScreenState extends State<DailyMenuBetaScreen> {
       backgroundColor: kBackgroundColor,
       body: StreamBuilder<QuerySnapshot>(
           stream: _firestore
-              .collection(currentUserEmail)
-              .doc("menu")
+              .collection("restaurants")
+              .doc(currentUserEmail)
+              .collection("menu")
+              .doc("food")
               .collection("daily_menu")
               .orderBy("image")
               .snapshots(),

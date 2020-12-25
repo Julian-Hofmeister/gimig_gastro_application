@@ -19,6 +19,8 @@ dependencies:
   cloud_firestore: ^0.14.4
   firebase_storage: ^5.2.0
   firebase_analytics: ^5.0.6
+  path: ^1.7.0
+  uuid: ^2.1.0
 
   image_picker: ^0.6.7+4
   path_provider: ^1.6.11
