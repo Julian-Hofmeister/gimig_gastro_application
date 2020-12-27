@@ -1,15 +1,84 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class CategoryCard extends StatelessWidget {
-  CategoryCard({this.name, this.image, this.buttonAction});
-  final String name;
-  final String image;
-  final Function buttonAction;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:gimig_gastro_application/classes/category_class.dart';
+import 'package:gimig_gastro_application/main/screen_arguments.dart';
+import 'package:gimig_gastro_application/screens/category_screen.dart';
+import 'package:gimig_gastro_application/screens/category_screen_connected.dart';
+import 'package:gimig_gastro_application/screens/item_screen_connected.dart';
+import 'package:gimig_gastro_application/screens/small_card_screen.dart';
+import 'package:gimig_gastro_application/services/firebase_storage_service.dart';
+import 'package:gimig_gastro_application/services/image_cache_services.dart';
+import 'package:network_to_file_image/network_to_file_image.dart';
+import 'package:path_provider/path_provider.dart';
+
+Directory _appDocsDir;
+
+class CategoryCard extends StatefulWidget {
+  CategoryCard({this.category, this.path});
+  final Category category;
+  final CollectionReference path;
+
+  @override
+  _CategoryCardState createState() => _CategoryCardState();
+}
+
+class _CategoryCardState extends State<CategoryCard> {
+  final ImageCacheService _imageCacheService = ImageCacheService();
+
+  Future _getDir() async {
+    _appDocsDir = await getApplicationDocumentsDirectory();
+  }
+
+  void initState() {
+    super.initState();
+    _getDir();
+  }
+
+  Future<Widget> _getImage(BuildContext context, String imageName) async {
+    Image image;
+    await FireStorageService.loadImage(context, imageName).then((value) {
+      image = Image(
+        image: NetworkToFileImage(
+          file: _imageCacheService.fileFromDocsDir(imageName, _appDocsDir),
+          url: value.toString(),
+          debug: true,
+        ),
+        fit: BoxFit.cover,
+      );
+      print(value.toString());
+      widget.category.imageFile = image;
+    });
+    return image;
+  }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: buttonAction,
+      onTap: () {
+        if (widget.category.hasSubcategory == true) {
+          Navigator.pushNamed(
+            context,
+            CategoryScreenConnected.id,
+            arguments: ScreenArguments(
+              path: widget.path
+                  .doc(widget.category.title)
+                  .collection("categories"),
+              title: widget.category.title,
+            ),
+          );
+        } else {
+          Navigator.pushNamed(
+            context,
+            ItemScreenConnected.id,
+            arguments: ScreenArguments(
+              path: widget.path,
+              title: widget.category.title,
+            ),
+          );
+        }
+      },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 60),
         child: Stack(
@@ -19,8 +88,6 @@ class CategoryCard extends StatelessWidget {
               height: 350,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(20)),
-                image: DecorationImage(
-                    image: AssetImage(image), fit: BoxFit.cover),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
@@ -30,6 +97,37 @@ class CategoryCard extends StatelessWidget {
                   ),
                 ],
               ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20.0),
+                child: FutureBuilder(
+                    future: _getImage(context, widget.category.coverImage),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        print("DATA: ${snapshot.data}");
+                        if (snapshot.data != null) {
+                          return Container(
+                            child: snapshot.data,
+                          );
+                        } else {
+                          Future.delayed(const Duration(milliseconds: 20), () {
+                            setState(() {});
+                          });
+                        }
+                      }
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Container(
+                          child: snapshot.data,
+                        );
+                      } else {}
+                      return Container(
+                        child: CircularProgressIndicator(),
+                      );
+                    }),
+              ),
+            ),
+            Container(
+              width: 650,
+              height: 350,
               child: Align(
                 alignment: Alignment.bottomRight,
                 child: Container(
@@ -45,7 +143,7 @@ class CategoryCard extends StatelessWidget {
                   width: 270,
                   child: Center(
                     child: Text(
-                      name,
+                      widget.category.title,
                       style: TextStyle(
                         fontSize: 25,
                         fontFamily: "Montserrat",

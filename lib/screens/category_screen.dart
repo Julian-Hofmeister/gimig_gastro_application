@@ -33,14 +33,7 @@ class CategoryScreen extends StatelessWidget {
               children: List.generate(
                 category.items.length,
                 (index) => CategoryCard(
-                  name: category.items[index].title,
-                  image: category.items[index].coverImage,
-                  buttonAction: () {
-                    Navigator.of(context).pushNamed(
-                      category.items[index].pushScreen,
-                      arguments: category.items[index],
-                    );
-                  },
+                  category: category,
                 ),
               ),
             ),

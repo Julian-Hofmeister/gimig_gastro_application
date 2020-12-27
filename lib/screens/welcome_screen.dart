@@ -12,9 +12,10 @@ import 'package:gimig_gastro_application/dialogs/pay_dialog.dart';
 import 'package:gimig_gastro_application/functions/connection_check.dart';
 import 'package:gimig_gastro_application/functions/table_number_storage.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
-import 'package:gimig_gastro_application/objects/category_example.dart';
+import 'package:gimig_gastro_application/main/screen_arguments.dart';
 import 'package:gimig_gastro_application/screens/account/settings_screen.dart';
 import 'package:gimig_gastro_application/screens/category_screen.dart';
+import 'package:gimig_gastro_application/screens/category_screen_connected.dart';
 import 'package:gimig_gastro_application/screens/daily_menu_screen_beta.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -295,9 +296,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                       MediaQuery.of(context).size.width * 0.32,
                                   buttonText: "Getränke",
                                   buttonAction: () {
-                                    Navigator.of(context).pushNamed(
-                                        CategoryScreen.id,
-                                        arguments: beverages);
+                                    Navigator.of(context)
+                                        .pushNamed(CategoryScreenConnected.id,
+                                            arguments: ScreenArguments(
+                                              path: _firestore
+                                                  .collection("restaurants")
+                                                  .doc("$currentUserEmail")
+                                                  .collection("menu")
+                                                  .doc("beverages")
+                                                  .collection("categories"),
+                                              title: "Getränke",
+                                            ));
                                   },
                                 ),
                                 SizedBox(
@@ -313,8 +322,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                   buttonText: "Speisen",
                                   buttonAction: () {
                                     Navigator.of(context).pushNamed(
-                                      CategoryScreen.id,
-                                      arguments: courses,
+                                      CategoryScreenConnected.id,
+                                      arguments: ScreenArguments(
+                                        path: _firestore
+                                            .collection("restaurants")
+                                            .doc("$currentUserEmail")
+                                            .collection("menu")
+                                            .doc("food")
+                                            .collection("categories"),
+                                        title: "Speisekarte",
+                                      ),
                                     );
                                   },
                                 ),
