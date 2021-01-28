@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gimig_gastro_application/functions/table_number_storage.dart';
+import 'package:gimig_gastro_application/services/table_number_storage.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
 
 class BellSuccessDialog extends StatelessWidget {
-  final TableNumberStorage storage = TableNumberStorage();
+  final TableNumberStorageService storage = TableNumberStorageService();
   BellSuccessDialog({this.status});
   final String status;
 

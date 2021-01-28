@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gimig_gastro_application/dialogs/bell_success_dialog.dart';
-import 'package:gimig_gastro_application/functions/table_number_storage.dart';
+import 'package:gimig_gastro_application/services/table_number_storage.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
 
 class BellDialog extends StatefulWidget {
-  final TableNumberStorage storage = TableNumberStorage();
+  final TableNumberStorageService storage = TableNumberStorageService();
   BellDialog({this.status});
   final String status;
 

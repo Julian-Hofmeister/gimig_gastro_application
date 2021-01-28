@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gimig_gastro_application/classes/item_class.dart';
-import 'package:gimig_gastro_application/components/cards/small_card_connected.dart';
+import 'package:gimig_gastro_application/components/cards/item_card.dart';
 import 'package:gimig_gastro_application/components/elements/background_layout.dart';
 import 'package:gimig_gastro_application/components/elements/side_navigationbar.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
@@ -64,7 +64,7 @@ class _ItemScreenConnectedState extends State<ItemScreenConnected> {
 
               items.insert(0, item);
 
-              final itemCard = SmallCardConnected(
+              final itemCard = ItemCard(
                 item: item,
               );
               itemList.insert(0, itemCard);

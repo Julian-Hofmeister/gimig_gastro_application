@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 // Colors
-// const kBackgroundColor = Color(0xFFeeeeee);
-// const kAccentColor = Color(0xFFEE964B);
 const kScrollEffect = Colors.white;
 
 const kFontColor1 = Color(0xFF3B3938);

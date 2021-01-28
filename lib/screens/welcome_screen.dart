@@ -9,19 +9,18 @@ import 'package:gimig_gastro_application/components/elements/text_button.dart';
 import 'package:gimig_gastro_application/components/messages/message1.dart';
 import 'package:gimig_gastro_application/dialogs/bell_dialog.dart';
 import 'package:gimig_gastro_application/dialogs/pay_dialog.dart';
-import 'package:gimig_gastro_application/functions/connection_check.dart';
-import 'package:gimig_gastro_application/functions/table_number_storage.dart';
+import 'package:gimig_gastro_application/services/connection_service.dart';
+import 'package:gimig_gastro_application/services/table_number_storage.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
 import 'package:gimig_gastro_application/main/screen_arguments.dart';
 import 'package:gimig_gastro_application/screens/account/settings_screen.dart';
-import 'package:gimig_gastro_application/screens/category_screen.dart';
+import 'package:gimig_gastro_application/screens/cart_screen.dart';
 import 'package:gimig_gastro_application/screens/category_screen_connected.dart';
-import 'package:gimig_gastro_application/screens/daily_menu_screen_beta.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const String id = 'welcome_screen';
 
-  final TableNumberStorage storage = TableNumberStorage();
+  final TableNumberStorageService storage = TableNumberStorageService();
   WelcomeScreen({this.name});
   final String name;
 
@@ -30,42 +29,25 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  DocumentReference _firestore = FirebaseFirestore.instance
+      .collection("restaurants")
+      .doc("${FirebaseAuth.instance.currentUser.email}");
 
   String tableMessage;
   int tableNumber;
   String status;
   bool ableToPay;
 
-  String currentUserEmail = FirebaseAuth.instance.currentUser.email;
-
   Future<void> checkMessage({documentID}) async {
-    print("MESSAGE!!!");
-
     await _firestore
-        .collection("restaurants")
-        .doc("$currentUserEmail")
         .collection("tables")
         .doc("$tableNumber")
         .collection("messages")
         .doc("$documentID")
         .update({"state": true});
     showMessage();
-  }
 
-  Icon checkIcon() {
-    if (status != "calledService") {
-      return Icon(
-        Icons.notifications_active,
-        color: Colors.white,
-        size: MediaQuery.of(context).size.width * 0.04,
-      );
-    }
-    return Icon(
-      Icons.check,
-      color: Colors.white,
-      size: MediaQuery.of(context).size.width * 0.04,
-    );
+    print("MESSAGE:");
   }
 
   Future<void> showMessage() async {
@@ -82,26 +64,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       });
     });
     print("Tablenumber $tableNumber");
-    var snapshot = await FirebaseFirestore.instance
-        .collection('restaurants')
-        .doc('$currentUserEmail')
-        .collection('tables')
-        .doc("$tableNumber")
-        .get();
+    var snapshot =
+        await _firestore.collection('tables').doc("$tableNumber").get();
 
     status = snapshot.data()["status"];
     print("STATUS: $status");
     return status;
   }
 
-  // TODO DARKEN DISPLAY AFTER 5MIN
-
   @override
   void initState() {
     super.initState();
-
     listenToConnection(context);
-
     widget.storage.readTableNumber().then((int value) {
       setState(() {
         tableNumber = value;
@@ -110,7 +84,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     getStatus();
   }
 
-  // TODO ANIMATIONS EVERYWHERE
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
@@ -118,8 +91,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       body: StreamBuilder<QuerySnapshot>(
         //STREAM
         stream: _firestore
-            .collection("restaurants")
-            .doc("$currentUserEmail")
             .collection("tables")
             .doc("$tableNumber")
             .collection("messages")
@@ -127,9 +98,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Center(
-              child: CircularProgressIndicator(
-                backgroundColor: Colors.orangeAccent,
-              ),
+              child: CircularProgressIndicator(),
             );
           }
           final messages = snapshot.data.docs;
@@ -147,20 +116,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             }
           }
 
-          // TODO ADD ERROR MESSAGE
           return StreamBuilder<QuerySnapshot>(
             //STREAM
-            stream: _firestore
-                .collection("restaurants")
-                .doc("$currentUserEmail")
-                .collection("tables")
-                .snapshots(),
+            stream: _firestore.collection("tables").snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(
-                  child: CircularProgressIndicator(
-                    backgroundColor: Colors.orangeAccent,
-                  ),
+                  child: CircularProgressIndicator(),
                 );
               }
               final calls = snapshot.data.docs;
@@ -175,7 +137,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 if (documentID == tableNumber.toString()) {
                   print("TABLE: $documentID STATUS: $tableStatus");
                   status = tableStatus;
-                  checkIcon();
                 }
 
                 //CHECK ABLE TO PAY
@@ -223,7 +184,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           padding: EdgeInsets.all(
                             MediaQuery.of(context).size.width * 0.03,
                           ),
-                          child: checkIcon(),
+                          child: status != "calledService"
+                              ? Icon(
+                                  Icons.notifications_active,
+                                  color: Colors.white,
+                                  size:
+                                      MediaQuery.of(context).size.width * 0.04,
+                                )
+                              : Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                  size:
+                                      MediaQuery.of(context).size.width * 0.04,
+                                ),
                         ),
                       ),
                     ),
@@ -232,7 +205,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     alignment: Alignment.bottomLeft,
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, DailyMenuBetaScreen.id);
+                        Navigator.pushNamed(context, CartScreen.id);
                       },
                       child: Container(
                         color: Colors.white.withOpacity(0),
@@ -300,8 +273,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                         .pushNamed(CategoryScreenConnected.id,
                                             arguments: ScreenArguments(
                                               path: _firestore
-                                                  .collection("restaurants")
-                                                  .doc("$currentUserEmail")
                                                   .collection("menu")
                                                   .doc("beverages")
                                                   .collection("categories"),
@@ -325,8 +296,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                       CategoryScreenConnected.id,
                                       arguments: ScreenArguments(
                                         path: _firestore
-                                            .collection("restaurants")
-                                            .doc("$currentUserEmail")
                                             .collection("menu")
                                             .doc("food")
                                             .collection("categories"),

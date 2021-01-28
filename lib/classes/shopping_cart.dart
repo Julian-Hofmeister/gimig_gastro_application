@@ -1,10 +1,10 @@
 class Cart {
-  Cart({this.shoppingList, this.orderdList});
+  Cart({this.shoppingList, this.orderedList});
   final List shoppingList;
-  List orderdList;
+  List orderedList;
 }
 
 Cart shoppingCart = Cart(
   shoppingList: [],
-  orderdList: [],
+  orderedList: [],
 );

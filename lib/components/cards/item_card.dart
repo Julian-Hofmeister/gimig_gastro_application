@@ -10,15 +10,15 @@ import 'package:path_provider/path_provider.dart';
 
 Directory _appDocsDir;
 
-class SmallCardConnected extends StatefulWidget {
-  SmallCardConnected({this.item});
+class ItemCard extends StatefulWidget {
+  ItemCard({this.item});
   final Item item;
 
   @override
-  _SmallCardConnectedState createState() => _SmallCardConnectedState();
+  _ItemCardState createState() => _ItemCardState();
 }
 
-class _SmallCardConnectedState extends State<SmallCardConnected> {
+class _ItemCardState extends State<ItemCard> {
   final ImageCacheService _imageCacheService = ImageCacheService();
 
   Future _getDir() async {

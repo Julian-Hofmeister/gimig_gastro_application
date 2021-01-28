@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gimig_gastro_application/services/firebase_functions.dart';
 import 'package:gimig_gastro_application/main/route_generator.dart';
 import 'package:gimig_gastro_application/screens/account/login_screen.dart';
 import 'package:gimig_gastro_application/screens/welcome_screen.dart';
@@ -28,8 +27,6 @@ Future<void> main() async {
 
 // ignore: must_be_immutable
 class MyApp extends StatelessWidget {
-  FirebaseFunctions firebaseFunctions = FirebaseFunctions();
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

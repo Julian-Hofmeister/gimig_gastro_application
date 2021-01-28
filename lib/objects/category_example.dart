@@ -1,8 +1,7 @@
 import 'package:gimig_gastro_application/classes/category_class.dart';
 import 'package:gimig_gastro_application/objects/items_example.dart';
-import 'package:gimig_gastro_application/screens/category_screen.dart';
-import 'package:gimig_gastro_application/screens/daily_menu_screen_beta.dart';
-import 'package:gimig_gastro_application/screens/small_card_screen.dart';
+import 'package:gimig_gastro_application/unused/category_screen.dart';
+import 'package:gimig_gastro_application/unused/small_card_screen.dart';
 
 //
 //
@@ -14,20 +13,11 @@ import 'package:gimig_gastro_application/screens/small_card_screen.dart';
 Category courses = Category(
   title: "Speisen",
   items: [
-    daily,
     starter,
     mainCourse,
     dessert,
     specials,
   ],
-);
-
-// TAGESKARTE
-Category daily = Category(
-  title: "Tageskarte",
-  coverImage: "images/Hauptspeise3c.png",
-  pushScreen: DailyMenuBetaScreen.id,
-  items: [],
 );
 
 // VORSPEISEN

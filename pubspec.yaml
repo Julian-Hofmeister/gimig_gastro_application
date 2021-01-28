@@ -22,7 +22,6 @@ dependencies:
   path: ^1.7.0
   uuid: ^2.1.0
 
-  image_picker: ^0.6.7+4
   path_provider: ^1.6.11
   numberpicker: ^1.2.1
 

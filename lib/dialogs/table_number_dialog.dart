@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
-import 'package:gimig_gastro_application/functions/table_number_storage.dart';
+import 'package:gimig_gastro_application/services/table_number_storage.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
 import 'package:numberpicker/numberpicker.dart';
 
 class TableNumberDialog extends StatefulWidget {
-  final TableNumberStorage storage = TableNumberStorage();
+  final TableNumberStorageService storage = TableNumberStorageService();
 
   @override
   _TableNumberDialogState createState() => _TableNumberDialogState();

@@ -10,14 +10,14 @@ import 'package:gimig_gastro_application/components/elements/background_layout.d
 import 'package:gimig_gastro_application/components/elements/side_navigationbar.dart';
 import 'package:gimig_gastro_application/components/elements/text_button.dart';
 import 'package:gimig_gastro_application/dialogs/error_dialog.dart';
-import 'package:gimig_gastro_application/functions/table_number_storage.dart';
+import 'package:gimig_gastro_application/services/table_number_storage.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
 import 'package:gimig_gastro_application/objects/category_example.dart';
-import 'package:gimig_gastro_application/screens/category_screen.dart';
+import 'package:gimig_gastro_application/unused/category_screen.dart';
 
 class CartScreen extends StatefulWidget {
   static const String id = 'cart_screen';
-  final TableNumberStorage storage = TableNumberStorage();
+  final TableNumberStorageService storage = TableNumberStorageService();
 
   @override
   _CartScreenState createState() => _CartScreenState();
@@ -45,7 +45,6 @@ class _CartScreenState extends State<CartScreen> {
         .toString();
   }
 
-  // TODO SEND SAME ITEMS TOGETHER
   // SEND ORDER
   void order() async {
     if (await DataConnectionChecker().hasConnection != true) {
@@ -91,7 +90,7 @@ class _CartScreenState extends State<CartScreen> {
       // CLEAR SHOPPING CART
       setState(() {
         for (Item item in shoppingCart.shoppingList) {
-          shoppingCart.orderdList.insert(0, item);
+          shoppingCart.orderedList.insert(0, item);
         }
         shoppingCart.shoppingList.clear();
       });
@@ -187,7 +186,7 @@ class _CartScreenState extends State<CartScreen> {
                       ],
                     ),
                   ),
-                if (shoppingCart.orderdList.length > 0)
+                if (shoppingCart.orderedList.length > 0)
                   Padding(
                     padding: EdgeInsets.only(
                         top: MediaQuery.of(context).size.width * 0.05,
@@ -206,10 +205,10 @@ class _CartScreenState extends State<CartScreen> {
                   shrinkWrap: true,
                   physics: ClampingScrollPhysics(),
                   children: List.generate(
-                    shoppingCart.orderdList.length,
+                    shoppingCart.orderedList.length,
                     (index) => AbsorbPointer(
                       child: OrderCard(
-                        item: shoppingCart.orderdList[index],
+                        item: shoppingCart.orderedList[index],
                         state: true,
                       ),
                     ),

@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:gimig_gastro_application/classes/food_class.dart';
+import 'package:gimig_gastro_application/classes/item_class.dart';
 
 class CloudStorageService {
   final _firestore = FirebaseFirestore.instance;
@@ -57,12 +57,12 @@ class CloudStorageService {
     return null;
   }
 
-  deleteFood(Food food) async {
-    if (food.image != null) {
+  deleteFood(Item item) async {
+    if (item.image != null) {
       // StorageReference storageReference =
       //     await FirebaseStorage.instance.getReferenceFromUrl(food.image);
 
-      Reference ref = FirebaseStorage.instance.ref().child(food.image);
+      Reference ref = FirebaseStorage.instance.ref().child(item.image);
 
       print(ref.name);
 
@@ -71,8 +71,8 @@ class CloudStorageService {
       print('image deleted');
     }
 
-    print("FoodID: ${food.id}");
-    await FirebaseFirestore.instance.collection('menu').doc(food.id).delete();
+    print("FoodID: ${item.id}");
+    await FirebaseFirestore.instance.collection('menu').doc(item.id).delete();
     // foodDeleted(food);
   }
 }

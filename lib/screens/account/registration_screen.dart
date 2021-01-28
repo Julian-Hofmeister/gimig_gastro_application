@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gimig_gastro_application/services/authentication_servie.dart';
-import 'package:gimig_gastro_application/services/firebase_functions.dart';
 import 'package:gimig_gastro_application/screens/account/login_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -13,8 +12,6 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  FirebaseFunctions firebaseFunctions = FirebaseFunctions();
-
   String email;
   String password;
   String name;
