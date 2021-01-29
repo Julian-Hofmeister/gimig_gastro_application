@@ -1,7 +1,7 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/material.dart';
-import 'package:gimig_gastro_application/dialogs/error_dialog.dart';
-import 'package:gimig_gastro_application/screens/welcome_screen.dart';
+import 'package:gimig_gastro_application/main_interface/dialogs/error_dialog.dart';
+import 'package:gimig_gastro_application/main_interface/screens/home_screen/screens/welcome_screen.dart';
 
 connectionService() async {
   bool _connectionStatus = await DataConnectionChecker().hasConnection;

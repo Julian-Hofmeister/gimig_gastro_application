@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gimig_gastro_application/classes/category_class.dart';
-import 'package:gimig_gastro_application/components/cards/category_card.dart';
-import 'package:gimig_gastro_application/components/elements/background_layout.dart';
-import 'package:gimig_gastro_application/components/elements/side_navigationbar.dart';
+import 'package:gimig_gastro_application/main_interface/screens/category_screen/class/category_class.dart';
+import 'package:gimig_gastro_application/main_interface/components/background_layout/background_layout.dart';
+import 'package:gimig_gastro_application/main_interface/components/navigation_bar/side_navigationbar.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
+import 'package:gimig_gastro_application/main_interface/screens/category_screen/components/category_card/category_card.dart';
 
 // ignore: must_be_immutable
 class CategoryScreen extends StatelessWidget {

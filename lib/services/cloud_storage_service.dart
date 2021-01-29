@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:gimig_gastro_application/classes/item_class.dart';
+import 'package:gimig_gastro_application/main_interface/screens/item_screen/class/item_class.dart';
 
 class CloudStorageService {
   final _firestore = FirebaseFirestore.instance;

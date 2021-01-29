@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gimig_gastro_application/classes/item_class.dart';
+import 'package:gimig_gastro_application/main_interface/screens/item_screen/class/item_class.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
 
 class BigCard extends StatelessWidget {

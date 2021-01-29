@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:gimig_gastro_application/classes/category_class.dart';
+import 'package:gimig_gastro_application/authentication/screen/login_screen.dart';
+import 'package:gimig_gastro_application/authentication/screen/registration_screen.dart';
+import 'package:gimig_gastro_application/main_interface/screens/category_screen/class/category_class.dart';
 import 'package:gimig_gastro_application/main.dart';
 import 'package:gimig_gastro_application/main/screen_arguments.dart';
-import 'package:gimig_gastro_application/screens/account/login_screen.dart';
-import 'package:gimig_gastro_application/screens/account/registration_screen.dart';
-import 'package:gimig_gastro_application/screens/account/settings_screen.dart';
-import 'package:gimig_gastro_application/screens/category_screen_connected.dart';
-import 'package:gimig_gastro_application/screens/item_screen_connected.dart';
+import 'package:gimig_gastro_application/main_interface/screens/cart_screen/screens/cart_screen.dart';
+import 'package:gimig_gastro_application/main_interface/screens/category_screen/screens/category_screen_connected.dart';
+import 'package:gimig_gastro_application/main_interface/screens/home_screen/screens/welcome_screen.dart';
+import 'package:gimig_gastro_application/main_interface/screens/item_screen/screens/item_screen_connected.dart';
+import 'package:gimig_gastro_application/settings/screens/settings_screen.dart';
 import 'package:gimig_gastro_application/unused/big_card_screen.dart';
-import 'package:gimig_gastro_application/screens/cart_screen.dart';
 import 'package:gimig_gastro_application/unused/category_screen.dart';
 import 'package:gimig_gastro_application/unused/small_card_screen.dart';
-import 'package:gimig_gastro_application/screens/welcome_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {

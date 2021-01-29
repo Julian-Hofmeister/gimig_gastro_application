@@ -3,11 +3,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gimig_gastro_application/main/route_generator.dart';
-import 'package:gimig_gastro_application/screens/account/login_screen.dart';
-import 'package:gimig_gastro_application/screens/welcome_screen.dart';
 import 'package:provider/provider.dart';
 
-import 'services/authentication_servie.dart';
+import 'authentication/screen/login_screen.dart';
+import 'authentication/services/authentication_servie.dart';
+import 'main_interface/screens/home_screen/screens/welcome_screen.dart';
 
 class MyBehavior extends ScrollBehavior {
   @override
