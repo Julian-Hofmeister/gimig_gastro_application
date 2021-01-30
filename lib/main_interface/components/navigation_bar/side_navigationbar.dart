@@ -5,6 +5,10 @@ import 'package:gimig_gastro_application/main_interface/screens/home_screen/scre
 
 // TODO BETTER NAVIGATION
 class SideNavigationBar extends StatelessWidget {
+  SideNavigationBar({this.isShoppingCart = false});
+
+  final bool isShoppingCart;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -56,19 +60,20 @@ class SideNavigationBar extends StatelessWidget {
         //           size: 35,
         //           color: kDetailColor,
         //         ))),
-        GestureDetector(
-            onTap: () {
-              Navigator.pushReplacementNamed(context, CartScreen.id);
-            },
-            child: Container(
-                height: 100,
-                width: 100,
-                color: kBackgroundColor.withOpacity(0),
-                child: Icon(
-                  Icons.shopping_cart,
-                  size: 45,
-                  color: kDetailColor,
-                ))),
+        if (isShoppingCart != true)
+          GestureDetector(
+              onTap: () {
+                Navigator.pushReplacementNamed(context, CartScreen.id);
+              },
+              child: Container(
+                  height: 100,
+                  width: 100,
+                  color: kBackgroundColor.withOpacity(0),
+                  child: Icon(
+                    Icons.shopping_cart,
+                    size: 45,
+                    color: kDetailColor,
+                  ))),
       ],
     );
   }

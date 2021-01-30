@@ -5,33 +5,25 @@ class CustomTextButton extends StatelessWidget {
   CustomTextButton({
     @required this.buttonText,
     this.buttonAction,
-    this.buttonHeight = 50,
-    this.buttonWidth = 330,
-    this.textSize = 22,
-    this.textColor = Colors.black87,
-    this.backgroundColor = Colors.white,
   });
   final String buttonText;
   final Function buttonAction;
-  final double buttonHeight;
-  final double buttonWidth;
-  final double textSize;
-  final Color textColor;
-  final Color backgroundColor;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: buttonHeight,
-      width: buttonWidth,
+      height: 50,
+      width: MediaQuery.of(context).size.width * 0.4,
       child: FlatButton(
         onPressed: buttonAction,
         child: Text(
           buttonText,
-          style:
-              kButtonTextStyle.copyWith(fontSize: textSize, color: textColor),
+          style: kButtonTextStyle.copyWith(
+            fontSize: 22,
+            color: Colors.white,
+          ),
         ),
-        color: backgroundColor,
+        color: kAccentColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),

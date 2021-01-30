@@ -143,11 +143,9 @@ class _CategoryCardState extends State<CategoryCard> {
                     child: Text(
                       widget.category.title,
                       style: TextStyle(
-                        fontSize: 25,
-                        fontFamily: "Montserrat",
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 1.2,
-                      ),
+                          fontSize: 24,
+                          letterSpacing: 1,
+                          fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),
