@@ -15,6 +15,7 @@ class Item {
   final String image;
   final String name;
   final String price;
+  // final int price;
   final String description;
   final String id;
   Widget imageFile;

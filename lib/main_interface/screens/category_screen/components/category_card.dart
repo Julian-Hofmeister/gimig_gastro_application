@@ -107,9 +107,8 @@ class _CategoryCardState extends State<CategoryCard> {
                             child: snapshot.data,
                           );
                         } else {
-                          Future.delayed(const Duration(milliseconds: 20), () {
-                            setState(() {});
-                          });
+                          Future.delayed(
+                              const Duration(milliseconds: 20), () {});
                         }
                       }
                       if (snapshot.connectionState == ConnectionState.waiting) {

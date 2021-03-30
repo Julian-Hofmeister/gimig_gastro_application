@@ -4,7 +4,7 @@ import 'package:gimig_gastro_application/main_interface/screens/category_screen/
 import 'package:gimig_gastro_application/main_interface/components/background_layout/background_layout.dart';
 import 'package:gimig_gastro_application/main_interface/components/navigation_bar/side_navigationbar.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
-import 'package:gimig_gastro_application/main_interface/screens/category_screen/components/category_card/category_card.dart';
+import 'package:gimig_gastro_application/main_interface/screens/category_screen/components/category_card.dart';
 
 // ignore: must_be_immutable
 class CategoryScreen extends StatelessWidget {

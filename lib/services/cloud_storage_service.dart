@@ -59,9 +59,6 @@ class CloudStorageService {
 
   deleteFood(Item item) async {
     if (item.image != null) {
-      // StorageReference storageReference =
-      //     await FirebaseStorage.instance.getReferenceFromUrl(food.image);
-
       Reference ref = FirebaseStorage.instance.ref().child(item.image);
 
       print(ref.name);

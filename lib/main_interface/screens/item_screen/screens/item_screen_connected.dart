@@ -20,6 +20,23 @@ class ItemScreenConnected extends StatefulWidget {
 }
 
 class _ItemScreenConnectedState extends State<ItemScreenConnected> {
+  double widget1Opacity = 0.0;
+
+  fadeIn() {
+    Future.delayed(Duration(milliseconds: 100), () {
+      setState(() {
+        widget1Opacity = 1;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fadeIn();
+    print(widget1Opacity);
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
@@ -59,7 +76,7 @@ class _ItemScreenConnectedState extends State<ItemScreenConnected> {
                 name: name,
                 image: image,
                 description: description,
-                price: price,
+                price: price.toString(),
               );
 
               items.insert(0, item);
@@ -77,11 +94,15 @@ class _ItemScreenConnectedState extends State<ItemScreenConnected> {
                 GlowingOverscrollIndicator(
                   axisDirection: AxisDirection.down,
                   color: kScrollEffect,
-                  child: ListView(
-                    padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.width * 0.03,
-                        left: MediaQuery.of(context).size.width * 0.12),
-                    children: itemList,
+                  child: AnimatedOpacity(
+                    opacity: widget1Opacity,
+                    duration: Duration(milliseconds: 100),
+                    child: ListView(
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.width * 0.03,
+                          left: MediaQuery.of(context).size.width * 0.12),
+                      children: itemList,
+                    ),
                   ),
                 ),
                 SideNavigationBar(),

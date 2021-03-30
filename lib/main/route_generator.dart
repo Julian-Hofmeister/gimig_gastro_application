@@ -8,7 +8,7 @@ import 'package:gimig_gastro_application/main_interface/screens/cart_screen/scre
 import 'package:gimig_gastro_application/main_interface/screens/category_screen/screens/category_screen_connected.dart';
 import 'package:gimig_gastro_application/main_interface/screens/home_screen/screens/welcome_screen.dart';
 import 'package:gimig_gastro_application/main_interface/screens/item_screen/screens/item_screen_connected.dart';
-import 'package:gimig_gastro_application/settings/screens/settings_screen.dart';
+import 'package:gimig_gastro_application/settings/screens/setting_screen.dart';
 import 'package:gimig_gastro_application/unused/big_card_screen.dart';
 import 'package:gimig_gastro_application/unused/category_screen.dart';
 import 'package:gimig_gastro_application/unused/small_card_screen.dart';
@@ -84,11 +84,27 @@ class RouteGenerator {
 
       case CategoryScreenConnected.id:
         if (args != null) {
-          return MaterialPageRoute(
-            builder: (_) => CategoryScreenConnected(
+          return PageRouteBuilder(
+            transitionDuration: Duration(milliseconds: 300),
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                CategoryScreenConnected(
               path: arguments.path,
               title: arguments.title,
             ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              var begin = Offset(1.0, 0);
+              var end = Offset.zero;
+              var curve = Curves.ease;
+
+              var tween =
+                  Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+              return SlideTransition(
+                position: animation.drive(tween),
+                child: child,
+              );
+            },
           );
         }
         return _errorRoute();

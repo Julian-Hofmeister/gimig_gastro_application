@@ -5,7 +5,7 @@ import 'package:gimig_gastro_application/main_interface/screens/category_screen/
 import 'package:gimig_gastro_application/main_interface/components/background_layout/background_layout.dart';
 import 'package:gimig_gastro_application/main_interface/components/navigation_bar/side_navigationbar.dart';
 import 'package:gimig_gastro_application/main/constants.dart';
-import 'package:gimig_gastro_application/main_interface/screens/category_screen/components/category_card/category_card.dart';
+import 'package:gimig_gastro_application/main_interface/screens/category_screen/components/category_card.dart';
 
 class CategoryScreenConnected extends StatefulWidget {
   static const String id = 'category_screen_connected';
@@ -21,6 +21,23 @@ class CategoryScreenConnected extends StatefulWidget {
 }
 
 class _CategoryScreenConnectedState extends State<CategoryScreenConnected> {
+  double widget1Opacity = 0.0;
+
+  fadeIn() {
+    Future.delayed(Duration(milliseconds: 100), () {
+      setState(() {
+        widget1Opacity = 1;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fadeIn();
+    print(widget1Opacity);
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
@@ -73,11 +90,15 @@ class _CategoryScreenConnectedState extends State<CategoryScreenConnected> {
               GlowingOverscrollIndicator(
                 axisDirection: AxisDirection.down,
                 color: kScrollEffect,
-                child: ListView(
-                  padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.width * 0.03,
-                      left: MediaQuery.of(context).size.width * 0.12),
-                  children: categoryList,
+                child: AnimatedOpacity(
+                  opacity: widget1Opacity,
+                  duration: Duration(milliseconds: 300),
+                  child: ListView(
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.width * 0.03,
+                        left: MediaQuery.of(context).size.width * 0.12),
+                    children: categoryList,
+                  ),
                 ),
               ),
               SideNavigationBar(),
